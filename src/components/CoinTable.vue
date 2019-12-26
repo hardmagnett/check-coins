@@ -13,6 +13,6 @@ export default {
 
 <style scoped lang="scss">
 .coin-table {
-  outline: 1px solid darkred;
+  outline: 1px solid $clrBorder;
 }
 </style>
