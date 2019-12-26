@@ -12,5 +12,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.coin-table-head {}
+.coin-table-head {
+  background-color: $clrBgSmall;
+  padding: $gap;
+  border-bottom: 1px solid $clrBorderOnLightBg;
+}
 </style>

@@ -24,11 +24,19 @@
 <style scoped lang="scss">
 .coin-table {
   background-color: white;
+  border: 1px solid $clrBorderOnDarkBg;
+
   display: flex;
   flex-flow: column nowrap;
   .coin-table__lines {
     flex: 0 1 auto;
     overflow-y: auto;
+    .coin-table-line {
+      border-bottom: 1px solid $clrBorderOnLightBg;
+      &:last-child {
+        border-bottom: none;
+      }
+    }
   }
 }
 </style>

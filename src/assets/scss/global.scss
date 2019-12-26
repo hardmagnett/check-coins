@@ -24,9 +24,9 @@
   }
 
   &:hover {
-    scrollbar-color: $clrBg transparent;
+    scrollbar-color: $clrBgAccent transparent;
   }
   &:hover::-webkit-scrollbar-thumb{
-      background: $clrBg;
+      background: $clrBgAccent;
   }
 }

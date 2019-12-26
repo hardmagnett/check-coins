@@ -25,6 +25,9 @@
 
 </script>
 <style scoped lang="scss">
+  #app {
+    background-color: $clrBgBig;
+  }
 .container-vertical {
   display: flex;
   flex-flow: column nowrap;
@@ -42,7 +45,10 @@
     flex-flow: column nowrap;
 
     @media (min-width: $bpSm) {
-      padding-bottom: 36px;
+      margin-bottom: 36px;
+      .coin-table {
+        border-radius: $border-radius;
+      }
     }
 
     .coin-table {
@@ -53,7 +59,7 @@
 }
 
 .container--top-just-for-design {
-  background-color: $clrBg;
+  background-color: $clrMain;
   height: $gap*2;
   @media (min-width: $bpSm) {
     height: 100px;

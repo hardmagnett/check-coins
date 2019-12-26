@@ -13,6 +13,6 @@ export default {
 
 <style scoped lang="scss">
 .coin-table-line {
-  border-bottom: 1px solid $clrBorder;
+  padding: $gap;
 }
 </style>

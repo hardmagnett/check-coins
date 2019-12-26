@@ -1,9 +1,12 @@
 
-$clrMain: #911723;
-$clrSecond: #019697;
-$clrAccent: #fb0720;
-$clrBg: #4a0419;
-$clrBorder: #22050A;
+$clrMain: #4A76A8;    // Большой фон
+$clrAccent: #5181B8;  // Кнопки, тонкие акцентированные линии
+
+$clrBgAccent: #CAD2DB;  // Чтобы было видно на фоне любого серого. Например для скроллбара, или подчеркивания в меню
+$clrBgBig: #EDEEF0;   // для больших задних фонов, например на всю страницу
+$clrBgSmall: #FAFBFC; // например для шапки в таблице
+$clrBorderOnLightBg: #EDEEF0;     // на фоне белого
+$clrBorderOnDarkBg: #E3E4E8;      // на фоне стыка белого с серым
 
 
 $bpSm:  480px;
@@ -13,3 +16,4 @@ $bpLg:  1280px;
 $bpXl:  1600px;
 
 $gap: 18px;
+$border-radius: 6px;
