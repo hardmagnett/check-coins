@@ -1,6 +1,11 @@
 <template>
   <div class="coin-details">
-    <img class="coin-details__img" src="https://static.coincap.io/assets/icons/mkr@2x.png">
+    <img
+      class="coin-details__img"
+      :src="imgUrl"
+      @error="fakeImgUrl"
+    >
+
     <div class="coin-details__texts">
       <p class="coin-details__name">Bitcoin</p>
       <p class="text text--small coin-details__code">BTC</p>
@@ -11,7 +16,23 @@
 <script>
 
 export default {
+  data(){
+    return{
+      tempCode: 'USDC'
+    }
+  },
+  computed: {
+    imgUrl(){
+      let codeLC = this.tempCode.toLowerCase()
+      return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`;
+    },
 
+  },
+  methods: {
+    fakeImgUrl(event){
+      event.target.src = 'https://coincap.io/static/logo_mark.png'
+    }
+  }
 }
 </script>
 
