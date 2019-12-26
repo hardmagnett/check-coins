@@ -24,5 +24,11 @@
 <style scoped lang="scss">
 .coin-table {
   background-color: white;
+  display: flex;
+  flex-flow: column nowrap;
+  .coin-table__lines {
+    flex: 0 1 auto;
+    overflow-y: auto;
+  }
 }
 </style>

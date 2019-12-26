@@ -1,27 +1,57 @@
 <template>
   <div id="app">
-    <container
-      class="container--fluid container--top-just-for-design"
-    >
-    </container>
-    <container
-      class="container--no-padding-on-xs"
-    >
-      <coin-table></coin-table>
-    </container>
+    <container-vertical>
+      <container
+        class="container--fluid container--top-just-for-design"
+      >
+      </container>
+      <container
+        class="container--no-padding-on-xs container--for-table"
+      >
+        <coin-table></coin-table>
+      </container>
+    </container-vertical>
 
   </div>
 </template>
 <script>
   import CoinTable from '@/components/CoinTable.vue'
   import Container from '@/components/Container.vue'
+  import ContainerVertical from '@/components/ContainerVertical.vue'
   export default {
-    components: {CoinTable, Container}
+    components: {CoinTable, Container, ContainerVertical}
   }
 
 
 </script>
-<style lang="scss">
+<style scoped lang="scss">
+.container-vertical {
+  display: flex;
+  flex-flow: column nowrap;
+  > * {
+    width: 100%;
+  }
+  .container--top-just-for-design {
+    flex: 0 0 auto;
+  }
+  .container--for-table {
+    flex: 0 1 auto;
+    overflow-y: hidden;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    @media (min-width: $bpSm) {
+      padding-bottom: 36px;
+    }
+
+    .coin-table {
+      overflow-y: hidden;
+    }
+
+  }
+}
+
 .container--top-just-for-design {
   background-color: $clrBg;
   height: $gap*2;
