@@ -11,3 +11,22 @@
     margin-bottom: 0;
   }
 }
+.global-mod--with-cool-scrollbar {
+  scrollbar-color: transparent transparent;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-thumb        {
+    background: transparent;
+  }
+
+  &:hover {
+    scrollbar-color: $clrBg transparent;
+  }
+  &:hover::-webkit-scrollbar-thumb{
+      background: $clrBg;
+  }
+}

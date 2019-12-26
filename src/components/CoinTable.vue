@@ -1,7 +1,7 @@
 <template>
   <div class="coin-table">
     <coin-table-head></coin-table-head>
-    <div class="coin-table__lines">
+    <div class="coin-table__lines global-mod--with-cool-scrollbar">
       <coin-table-line
         v-for="n in 100"
         :key="n"
