@@ -1,5 +1,10 @@
 @import "variables";
 
+body {
+  outline: 10px solid darkred;
+  font-family: 'Roboto', sans-serif;
+}
+
 * {
   box-sizing: border-box;
 
@@ -11,6 +16,7 @@
     margin-bottom: 0;
   }
 }
+
 .global-mod--with-cool-scrollbar {
   scrollbar-color: transparent transparent;
   scrollbar-width: thin;

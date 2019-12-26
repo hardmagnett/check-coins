@@ -24,10 +24,10 @@
 
 
 </script>
-<style scoped lang="scss">
-  #app {
-    background-color: $clrBgBig;
-  }
+<style lang="scss">
+#app {
+  background-color: $clrBgBig;
+}
 .container-vertical {
   display: flex;
   flex-flow: column nowrap;
