@@ -1,7 +1,7 @@
 @import "variables";
 
 body {
-  outline: 10px solid darkred;
+  //outline: 10px solid darkred;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -22,8 +22,8 @@ body {
   scrollbar-width: thin;
 
   &::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: $scrollbarWidth;
+    height: $scrollbarWidth;
   }
   ::-webkit-scrollbar-thumb        {
     background: transparent;
