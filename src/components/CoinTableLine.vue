@@ -5,10 +5,7 @@
         <p>1</p>
       </template>
       <template v-slot:name>
-        <div class="currency-details">
-          <p>Bitcoin</p>
-          <p>BTC</p>
-        </div>
+        <coin-details/>
       </template>
       <template v-slot:price>
         <p>$7,207.13	</p>
@@ -26,17 +23,20 @@
 <script>
 
 import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas'
+import CoinDetails from '@/components/CoinDetails'
 
 
 export default {
   components: {
-    CoinTableLineCarcaas
+    CoinTableLineCarcaas, CoinDetails
   }
 }
 </script>
 
 <style scoped lang="scss">
 .coin-table-line {
-
+  .coin-details {
+    width: 100%;
+  }
 }
 </style>
