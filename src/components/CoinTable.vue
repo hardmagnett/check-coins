@@ -38,23 +38,18 @@
     components: {CoinTableHead, CoinTableLine, VirtualList},
     computed: {
       assets(){
-        return Asset.all()
+        return Asset.getters('getAssetsPagination')
       }
     },
     methods: {
       async infiniteHandler($state) {
-        console.log('infiniteHandler')
-        // let result = await Asset.dispatch('fetchForTable2' , {foo: 'bar'})
-        let response = await Asset.dispatch('fetchForTable' , {foo: 'bar'})
+        let response = await Asset.dispatch('fetchForPaginationTable' , {foo: 'bar'})
         if (response.data.data.length) {
           $state.loaded();	// значит можно загружать ещё
         } else {
           $state.complete();	// значит больше загружать нельзя
         }
       },
-    },
-    async mounted(){
-      // await Asset.dispatch('fetchForTable' , {foo: 'bar'})
     }
   }
 </script>
