@@ -14,6 +14,9 @@
           :key="asset.id"
           :asset="asset"
         ></coin-table-line>
+        <infinite-loading
+          @infinite="infiniteHandler"
+        />
       </virtual-list>
     </div>
 
@@ -38,8 +41,20 @@
         return Asset.all()
       }
     },
+    methods: {
+      async infiniteHandler($state) {
+        console.log('infiniteHandler')
+        // let result = await Asset.dispatch('fetchForTable2' , {foo: 'bar'})
+        let response = await Asset.dispatch('fetchForTable' , {foo: 'bar'})
+        if (response.data.data.length) {
+          $state.loaded();	// значит можно загружать ещё
+        } else {
+          $state.complete();	// значит больше загружать нельзя
+        }
+      },
+    },
     async mounted(){
-      await Asset.dispatch('fetchForTable' , {foo: 'bar'})
+      // await Asset.dispatch('fetchForTable' , {foo: 'bar'})
     }
   }
 </script>
