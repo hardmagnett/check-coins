@@ -8,7 +8,7 @@ import store from './store'
 
 import InfiniteLoading from 'vue-infinite-loading';
 
-Vue.use(InfiniteLoading);
+Vue.use(InfiniteLoading, {});
 
 Vue.config.productionTip = false
 

@@ -16,7 +16,9 @@
         ></coin-table-line>
         <infinite-loading
           @infinite="infiniteHandler"
-        />
+        >
+          <span slot="no-results"></span>
+        </infinite-loading>
       </virtual-list>
     </div>
 
