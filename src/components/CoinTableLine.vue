@@ -8,10 +8,11 @@
         <coin-details :asset="asset"/>
       </template>
       <template v-slot:price>
-        <p>$7,207.13	</p>
+        <p>{{asset.priceUsdHumanReadable}}</p>
       </template>
       <template v-slot:market-cap>
-        <p>$130.59b	</p>
+<!--        <p>$130.59b	</p>-->
+        <p>{{asset.marketCapUsdHumanReadable}}	</p>
       </template>
       <template v-slot:vwap24hr>
         <p>$17,141.90</p>

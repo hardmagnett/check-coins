@@ -8,8 +8,10 @@ export default {
   actions: {
     async fetchForTable ({ commit, dispatch }) {
       // по умолчанию получает 100 результатов
-      let response = await coinApi.get('assets')
-      console.log(response); console.log('^...response:')
+      // const limit = 1000
+      const limit = 15
+      let response = await coinApi.get('assets', {params: {limit: 15}})
+      // console.log(response); console.log('^...response:')
 
       await dispatch('insertOrUpdate', {
         data: response.data.data
@@ -21,7 +23,7 @@ export default {
   mutations: {
     fetchForTable (state) {
       state.fetched = true
-      console.log('mutation')
+      // console.log('mutation')
     }
   }
 }
