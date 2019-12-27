@@ -26,7 +26,7 @@ export default class Asset extends Model {
       vwap24Hr: this.number(0),
     }
   }
-  
+
   get priceUsdHumanReadable () {
     let maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
     let result = numberFormatters.withPunctuation(this.priceUsd, maximumFractionDigits)

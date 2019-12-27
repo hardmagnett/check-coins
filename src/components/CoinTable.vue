@@ -2,17 +2,27 @@
   <div class="coin-table">
     <coin-table-head></coin-table-head>
     <div class="coin-table__lines global-mod--with-cool-scrollbar">
-      <coin-table-line
-        v-for="asset in assets"
-        :key="asset.id"
-        :asset="asset"
-      ></coin-table-line>
+      <virtual-list
+        :size="86"
+        :remain="20"
+
+        style="max-height: 100%;"
+        class="global-mod--with-cool-scrollbar"
+      >
+        <coin-table-line
+          v-for="asset in assets"
+          :key="asset.id"
+          :asset="asset"
+        ></coin-table-line>
+      </virtual-list>
     </div>
 
   </div>
 </template>
 
 <script>
+
+  import VirtualList from 'vue-virtual-scroll-list'
 
   import CoinTableHead from '@/components/CoinTableHead'
   import CoinTableLine from '@/components/CoinTableLine'
@@ -22,7 +32,7 @@
 
 
   export default {
-    components: {CoinTableHead, CoinTableLine},
+    components: {CoinTableHead, CoinTableLine, VirtualList},
     computed: {
       assets(){
         return Asset.all()
