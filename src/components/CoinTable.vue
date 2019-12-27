@@ -16,8 +16,15 @@
   import CoinTableHead from '@/components/CoinTableHead'
   import CoinTableLine from '@/components/CoinTableLine'
 
+  import Asset from '@/orm/Asset'
+
+
+
   export default {
-    components: {CoinTableHead, CoinTableLine}
+    components: {CoinTableHead, CoinTableLine},
+    async mounted(){
+      await Asset.dispatch('fetchForTable' , {foo: 'bar'})
+    }
   }
 </script>
 
