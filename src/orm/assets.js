@@ -1,3 +1,5 @@
+import coinApi from '@/plugins/axios/coinApi'
+
 export default {
   state: {
     fetched: false
@@ -5,16 +7,12 @@ export default {
 
   actions: {
     async fetchForTable ({ commit, dispatch }) {
+      // по умолчанию получает 100 результатов
+      let response = await coinApi.get('assets')
+      console.log(response); console.log('^...response:')
 
       await dispatch('insertOrUpdate', {
-        data: [
-          {
-            id: 'mycurrency',
-            rank: 100,
-            symbol: 'DDD',
-            name: 'my currency'
-          }
-        ]
+        data: response.data.data
       })
       commit('fetchForTable')
     }
