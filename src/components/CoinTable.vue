@@ -3,8 +3,9 @@
     <coin-table-head></coin-table-head>
     <div class="coin-table__lines global-mod--with-cool-scrollbar">
       <coin-table-line
-        v-for="n in 100"
-        :key="n"
+        v-for="asset in assets"
+        :key="asset.id"
+        :asset="asset"
       ></coin-table-line>
     </div>
 
@@ -22,6 +23,11 @@
 
   export default {
     components: {CoinTableHead, CoinTableLine},
+    computed: {
+      assets(){
+        return Asset.all()
+      }
+    },
     async mounted(){
       await Asset.dispatch('fetchForTable' , {foo: 'bar'})
     }

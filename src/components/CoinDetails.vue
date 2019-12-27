@@ -7,15 +7,23 @@
     >
 
     <div class="coin-details__texts">
-      <p class="coin-details__name">Bitcoin</p>
-      <p class="text text--small coin-details__code">BTC</p>
+      <p class="coin-details__name">{{asset.name}}</p>
+      <p class="text text--small coin-details__code">{{asset.symbol}}</p>
     </div>
   </div>
 </template>
 
 <script>
 
+import Asset from '@/orm/Asset'
+
 export default {
+  props: {
+    asset: {
+      type: Asset,
+      required: true
+    }
+  },
   data(){
     return{
       tempCode: 'USDC'
@@ -23,7 +31,7 @@ export default {
   },
   computed: {
     imgUrl(){
-      let codeLC = this.tempCode.toLowerCase()
+      let codeLC = this.asset.symbol.toLowerCase()
       return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`;
     },
 

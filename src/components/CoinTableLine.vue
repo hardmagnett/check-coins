@@ -2,10 +2,10 @@
   <div class="coin-table-line">
     <coin-table-line-carcaas>
       <template v-slot:rank>
-        <p>1</p>
+        <p>{{asset.rank}}</p>
       </template>
       <template v-slot:name>
-        <coin-details/>
+        <coin-details :asset="asset"/>
       </template>
       <template v-slot:price>
         <p>$7,207.13	</p>
@@ -25,10 +25,20 @@
 import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas'
 import CoinDetails from '@/components/CoinDetails'
 
+import Asset from '@/orm/Asset'
+
+
+
 
 export default {
   components: {
     CoinTableLineCarcaas, CoinDetails
+  },
+  props: {
+    asset: {
+      type: Asset,
+      required: true
+    }
   }
 }
 </script>
