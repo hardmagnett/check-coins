@@ -11,11 +11,10 @@
         <p>{{asset.priceUsdHumanReadable}}</p>
       </template>
       <template v-slot:market-cap>
-<!--        <p>$130.59b	</p>-->
         <p>{{asset.marketCapUsdHumanReadable}}	</p>
       </template>
       <template v-slot:vwap24hr>
-        <p>$17,141.90</p>
+        <p>{{asset.vwap24HrHumanReadable}}</p>
       </template>
     </coin-table-line-carcaas>
   </div>
