@@ -8,7 +8,21 @@ export default {
   },
 
   actions: {
-    SOCKET_ON_PRICE_CHANGE (state, message)  {
+    SOCKET_ON_PRICE_CHANGE (state, newPrices)  {
+      let dataToUpdate = []
+      for (let coinName in newPrices) {
+        let coinNewPrice = newPrices[coinName];
+        dataToUpdate.push({
+          id: coinName,
+          priceUsd: coinNewPrice
+        })
+      }
+      Asset.update({
+        data: dataToUpdate
+      })
+    },
+
+    SOCKET_ON_VOLUME_CHANGE (state, message)  {
       console.log(message); console.log('^...message in action in entities:')
     },
     async fetchForPaginationTable ({ state, commit, dispatch }) {
