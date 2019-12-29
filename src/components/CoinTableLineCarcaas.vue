@@ -7,7 +7,10 @@
       <slot name="name"/>
     </div>
     <div class="coin-table-line-carcaas__pusher"></div>
-    <div class="coin-table-line-carcaas__price">
+    <div class="coin-table-line-carcaas__price"
+         :class="{'mod--flash-green': isPriceJustIncreased}"
+         @animationend="isPriceJustIncreased = false"
+    >
       <slot name="price"/>
     </div>
     <div class="coin-table-line-carcaas__market-cap">
@@ -22,7 +25,16 @@
 <script>
 
 export default {
-
+  data: function(){
+    return {
+      isPriceJustIncreased: false
+    }
+  },
+  methods: {
+    highlightPriceIncrease() {
+      this.isPriceJustIncreased = true
+    }
+  }
 }
 </script>
 
@@ -30,13 +42,18 @@ export default {
 .coin-table-line-carcaas {
   display: flex;
   flex-flow: row nowrap;
-  align-items: center;
+  /*align-items: center;*/
+
+  align-items: stretch;
+
   > * {
     flex: 0 0 auto;
     padding: $gap / 2;
+    /*padding: 0;*/
     overflow: hidden;
     display: flex;
     /*outline: 1px solid darkred;*/
+    align-items: center;
   }
 
   .coin-table-line-carcaas__rank {
@@ -79,6 +96,17 @@ export default {
     .coin-table-line-carcaas__volumeUsd24Hr {
       display: flex;
     }
+  }
+
+
+  .mod--flash-green {
+    /*animation: flash-green 1s ease-in-out 0.5s alternate;*/
+    animation: flashGreen 1s
+  }
+  @keyframes flashGreen {
+    from {background-color: white;}
+    50% {background-color: green;}
+    to {background-color: white;}
   }
 }
 </style>

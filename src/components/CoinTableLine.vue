@@ -1,6 +1,8 @@
 <template>
   <div class="coin-table-line">
-    <coin-table-line-carcaas>
+    <coin-table-line-carcaas
+      ref="carcaas"
+    >
       <template v-slot:rank>
         <p
         >{{asset.rank}}</p>
@@ -9,13 +11,15 @@
         <coin-details :asset="asset"/>
       </template>
       <template v-slot:price>
+<!--        :class="{'mod&#45;&#45;flash-green': isPriceJustIncreased}"-->
+<!--        @animationend="isPriceJustIncreased = false"-->
         <p
-          :class="{'mod--flash-green': isPriceJustIncreased}"
-          @animationend="isPriceJustIncreased = false"
+
         >
           {{asset.priceUsdHumanReadable}}
         </p>
       </template>
+
       <template v-slot:market-cap>
         <p>{{asset.marketCapUsdHumanReadable}}	</p>
       </template>
@@ -46,14 +50,14 @@ export default {
       required: true
     }
   },
-  data: function(){
-    return {
-      isPriceJustIncreased: false
-    }
-  },
+  // data: function(){
+  //   return {
+  //     isPriceJustIncreased: false
+  //   }
+  // },
   watch: {
     'asset.priceUsd': function(newVal, oldVal){
-      this.isPriceJustIncreased = true
+      this.$refs.carcaas.highlightPriceIncrease()
     }
   }
 }
@@ -64,14 +68,5 @@ export default {
   .coin-details {
     width: 100%;
   }
-}
-.mod--flash-green {
-  /*animation: flash-green 1s ease-in-out 0.5s alternate;*/
-  animation: flashGreen 1s
-}
-@keyframes flashGreen {
-  from {background-color: white;}
-  50% {background-color: green;}
-  to {background-color: white;}
 }
 </style>
