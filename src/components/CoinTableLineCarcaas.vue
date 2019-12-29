@@ -8,8 +8,11 @@
     </div>
     <div class="coin-table-line-carcaas__pusher"></div>
     <div class="coin-table-line-carcaas__price"
-         :class="{'mod--flash-green': isPriceJustIncreased}"
-         @animationend="isPriceJustIncreased = false"
+         :class="{
+          'mod--flash-success': isPriceJustIncreased,
+          'mod--flash-error': isPriceJustDecreased
+         }"
+         @animationend="finishFlashAnimation"
     >
       <slot name="price"/>
     </div>
@@ -27,12 +30,20 @@
 export default {
   data: function(){
     return {
-      isPriceJustIncreased: false
+      isPriceJustIncreased: false,
+      isPriceJustDecreased: false
     }
   },
   methods: {
     highlightPriceIncrease() {
       this.isPriceJustIncreased = true
+    },
+    highlightPriceDecrease() {
+      this.isPriceJustDecreased = true
+    },
+    finishFlashAnimation(){
+      this.isPriceJustIncreased = false
+      this.isPriceJustDecreased = false
     }
   }
 }
@@ -99,14 +110,21 @@ export default {
   }
 
 
-  .mod--flash-green {
-    /*animation: flash-green 1s ease-in-out 0.5s alternate;*/
-    animation: flashGreen 1s
+  .mod--flash-success {
+    animation: flash-success 1s
   }
-  @keyframes flashGreen {
-    from {background-color: white;}
-    50% {background-color: green;}
-    to {background-color: white;}
+  @keyframes flash-success {
+    from {background-color: initial;}
+    50% {background-color: #d4facf;}
+    to {background-color: initial;}
+  }
+  .mod--flash-error {
+    animation: flash-error 1s
+  }
+  @keyframes flash-error {
+    from {background-color: initial;}
+    50% {background-color: #facfcb;}
+    to {background-color: initial;}
   }
 }
 </style>

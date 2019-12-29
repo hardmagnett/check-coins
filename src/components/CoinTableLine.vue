@@ -57,7 +57,17 @@ export default {
   // },
   watch: {
     'asset.priceUsd': function(newVal, oldVal){
-      this.$refs.carcaas.highlightPriceIncrease()
+      // console.log('asset.priceUsd----')
+      // console.log(newVal); console.log('^...newVal:')
+      // console.log(oldVal); console.log('^...oldVal:')
+      if (newVal > oldVal){
+        console.log(1)
+        this.$refs.carcaas.highlightPriceIncrease()
+      } else {
+        console.log(2)
+        this.$refs.carcaas.highlightPriceDecrease()
+      }
+
     }
   }
 }
