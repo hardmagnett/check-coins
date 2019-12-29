@@ -35,6 +35,7 @@ export default class Asset extends Model {
   }
 
   get vwap24HrHumanReadable () {
+    if (this.vwap24Hr === 0 ) return '-'
     let maximumFractionDigits = numberFormatters.getFractionByNumber(this.vwap24Hr)
     let result = numberFormatters.withPunctuation(this.vwap24Hr, maximumFractionDigits)
     result = numberFormatters.withCurrencySign(result)
@@ -42,6 +43,7 @@ export default class Asset extends Model {
   }
 
   get marketCapUsdHumanReadable () {
+    if (this.marketCapUsd === 0 ) return '-'
     let result = numberFormatters.withSuffix(this.marketCapUsd)
     result = numberFormatters.withCurrencySign(result)
     return result
