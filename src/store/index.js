@@ -8,7 +8,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {},
   mutations: {
-    // мутации по умолчанию, чтобы не ругалось в консоль что их нет.
+    // мутации-заглушки по умолчанию, чтобы не ругалось в консоль что их нет.
     SOCKET_ONOPEN () {},
     SOCKET_ONCLOSE () {},
     SOCKET_ONERROR () {},

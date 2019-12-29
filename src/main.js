@@ -33,6 +33,7 @@ Vue.use(VueNativeSock, 'wss://ws.coincap.io/prices?assets=ALL', {
       eventName === 'SOCKET_onmessage'
     ) {
       myVuexMethodType = 'dispatch' // вызывает экшн
+      myVuexNamespace = 'entities/assets/'
       myVuexMethodName = 'SOCKET_ON_PRICE_CHANGE'
     }
     let myVuexMethodNameFull = myVuexNamespace + myVuexMethodName

@@ -8,6 +8,9 @@ export default {
   },
 
   actions: {
+    SOCKET_ON_PRICE_CHANGE (state, message)  {
+      console.log(message); console.log('^...message in action in entities:')
+    },
     async fetchForPaginationTable ({ state, commit, dispatch }) {
       let response = await coinApi.get('assets', {params: {
         limit: 50,
