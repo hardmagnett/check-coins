@@ -11,11 +11,7 @@
         <coin-details :asset="asset"/>
       </template>
       <template v-slot:price>
-<!--        :class="{'mod&#45;&#45;flash-green': isPriceJustIncreased}"-->
-<!--        @animationend="isPriceJustIncreased = false"-->
-        <p
-
-        >
+        <p>
           {{asset.priceUsdHumanReadable}}
         </p>
       </template>
@@ -50,11 +46,6 @@ export default {
       required: true
     }
   },
-  // data: function(){
-  //   return {
-  //     isPriceJustIncreased: false
-  //   }
-  // },
   watch: {
     'asset.priceUsd': function(newVal, oldVal){
       if (newVal > oldVal){
