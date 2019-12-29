@@ -6,6 +6,7 @@
     <div class="coin-table-line-carcaas__name">
       <slot name="name"/>
     </div>
+    <div class="coin-table-line-carcaas__pusher"></div>
     <div class="coin-table-line-carcaas__price">
       <slot name="price"/>
     </div>
@@ -35,6 +36,7 @@ export default {
     padding: $gap;
     overflow: hidden;
     display: flex;
+    outline: 1px solid darkred;
   }
 
   .coin-table-line-carcaas__rank {
@@ -42,11 +44,16 @@ export default {
     justify-content: center;
   }
   .coin-table-line-carcaas__name {
-    flex: 1 0 auto
+    /*flex: 1 0 auto*/
+    flex: 0 1 auto;
+  }
+  .coin-table-line-carcaas__pusher {
+    flex: 1 1 auto;
+    padding: 0;
   }
 
   .coin-table-line-carcaas__price {
-    flex: 0 0 150px;
+    flex: 0 0 135px;
     justify-content: flex-end;
   }
   .coin-table-line-carcaas__market-cap {

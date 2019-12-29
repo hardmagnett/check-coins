@@ -53,11 +53,17 @@ export default {
     width: 50px;
     height: 50px;
     margin-right: $gap;
-    /*float: left;*/
-    /*outline: 1px solid darkred;*/
+  }
+  .coin-details__texts {
+    min-width: 0;   // flex specification fix
   }
   .coin-details__name {
     margin-bottom: 0.5em;
+
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
   .coin-details__code {
     margin-top: 0.5em;
