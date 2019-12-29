@@ -13,8 +13,8 @@
       <template v-slot:market-cap>
         <p>{{asset.marketCapUsdHumanReadable}}	</p>
       </template>
-      <template v-slot:vwap24hr>
-        <p>{{asset.vwap24HrHumanReadable}}</p>
+      <template v-slot:volumeUsd24Hr>
+        <p>{{asset.volumeUsd24HrHumanReadable}}</p>
       </template>
     </coin-table-line-carcaas>
   </div>

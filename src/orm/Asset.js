@@ -23,7 +23,7 @@ export default class Asset extends Model {
 
       priceUsd: this.number(0),
       marketCapUsd: this.number(0),
-      vwap24Hr: this.number(0),
+      volumeUsd24Hr: this.number(0),
     }
   }
 
@@ -33,11 +33,9 @@ export default class Asset extends Model {
     result = numberFormatters.withCurrencySign(result)
     return result
   }
-
-  get vwap24HrHumanReadable () {
-    if (this.vwap24Hr === 0 ) return '-'
-    let maximumFractionDigits = numberFormatters.getFractionByNumber(this.vwap24Hr)
-    let result = numberFormatters.withPunctuation(this.vwap24Hr, maximumFractionDigits)
+  get volumeUsd24HrHumanReadable () {
+    if (this.volumeUsd24Hr === 0 ) return '-'
+    let result = numberFormatters.withSuffix(this.volumeUsd24Hr)
     result = numberFormatters.withCurrencySign(result)
     return result
   }

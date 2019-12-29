@@ -13,8 +13,8 @@
       <template v-slot:market-cap>
         <p>Market Cap</p>
       </template>
-      <template v-slot:vwap24hr>
-        <p>VWAP (24Hr)</p>
+      <template v-slot:volumeUsd24Hr>
+        <p>Volume (24Hr)</p>
       </template>
     </coin-table-line-carcaas>
   </div>

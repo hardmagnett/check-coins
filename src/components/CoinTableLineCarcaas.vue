@@ -13,8 +13,8 @@
     <div class="coin-table-line-carcaas__market-cap">
       <slot name="market-cap"/>
     </div>
-    <div class="coin-table-line-carcaas__vwap24hr">
-      <slot name="vwap24hr"/>
+    <div class="coin-table-line-carcaas__volumeUsd24Hr">
+      <slot name="volumeUsd24Hr"/>
     </div>
   </div>
 </template>
@@ -59,13 +59,14 @@ export default {
     flex: 0 0 100px;
     justify-content: flex-end;
   }
-  .coin-table-line-carcaas__vwap24hr {
-    flex: 0 0 120px;
+  .coin-table-line-carcaas__volumeUsd24Hr {
+    flex: 0 0 130px;
     justify-content: flex-end;
   }
   .coin-table-line-carcaas__rank,
   .coin-table-line-carcaas__market-cap,
-  .coin-table-line-carcaas__vwap24hr {
+  .coin-table-line-carcaas__volumeUsd24Hr
+  {
     display: none;
   }
   @media (min-width: $bpSm) {
@@ -75,7 +76,7 @@ export default {
   }
   @media (min-width: $bpSm2) {
     .coin-table-line-carcaas__market-cap,
-    .coin-table-line-carcaas__vwap24hr {
+    .coin-table-line-carcaas__volumeUsd24Hr {
       display: flex;
     }
   }
