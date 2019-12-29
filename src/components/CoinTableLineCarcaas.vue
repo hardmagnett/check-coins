@@ -33,18 +33,17 @@ export default {
   align-items: center;
   > * {
     flex: 0 0 auto;
-    padding: $gap;
+    padding: $gap / 2;
     overflow: hidden;
     display: flex;
-    outline: 1px solid darkred;
+    /*outline: 1px solid darkred;*/
   }
 
   .coin-table-line-carcaas__rank {
-    flex: 0 0 80px;
+    flex: 0 0 60px;
     justify-content: center;
   }
   .coin-table-line-carcaas__name {
-    /*flex: 1 0 auto*/
     flex: 0 1 auto;
   }
   .coin-table-line-carcaas__pusher {
@@ -53,15 +52,15 @@ export default {
   }
 
   .coin-table-line-carcaas__price {
-    flex: 0 0 135px;
+    flex: 0 0 120px;
     justify-content: flex-end;
   }
   .coin-table-line-carcaas__market-cap {
-    flex: 0 0 150px;
+    flex: 0 0 100px;
     justify-content: flex-end;
   }
   .coin-table-line-carcaas__vwap24hr {
-    flex: 0 0 150px;
+    flex: 0 0 120px;
     justify-content: flex-end;
   }
   .coin-table-line-carcaas__rank,

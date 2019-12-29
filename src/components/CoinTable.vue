@@ -3,7 +3,7 @@
     <coin-table-head></coin-table-head>
     <div class="coin-table__lines global-mod--with-cool-scrollbar">
       <virtual-list
-        :size="86"
+        :size="69"
         :remain="20"
 
         style="max-height: 100%;"
