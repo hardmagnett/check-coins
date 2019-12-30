@@ -65,7 +65,11 @@ export default class Asset extends Model {
 
   get marketCapUsdHumanReadable () {
     if (this.marketCapUsd === 0 ) return '-'
-    let result = numberFormatters.withSuffix(this.marketCapUsd)
+    let result = numbro(this.marketCapUsd).format({
+      average: true,
+      thousandSeparated: true,
+      mantissa: 2,
+    });
     result = numberFormatters.withCurrencySign(result)
     return result
   }
