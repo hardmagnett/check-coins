@@ -53,28 +53,28 @@ let vm = new Vue({
 vm.$connect()
 
 // указывается название биржи
-// vm.$connect('wss://ws.coincap.io/trades/binance', {
-//   store: store,
-//   format: 'json',
-//   reconnection: true,
-//   connectManually: true,
-//   passToStoreHandler: function (eventName, event) {
-//     if (!eventName.startsWith('SOCKET_')) { return }
-//     console.log(event.data); console.log('^...event.data:')
-//     let msg = event.data ? JSON.parse(event.data) : {}
-//
-//     let myVuexMethodType = 'commit'             // по умолчанию вызывается мутация
-//     let myVuexNamespace = ''                    // по умолчанию корневой модуль
-//     let myVuexMethodName = eventName.toUpperCase()
-//
-//     if (
-//       eventName === 'SOCKET_onmessage'
-//     ) {
-//       myVuexMethodType = 'dispatch' // вызывает экшн
-//       myVuexNamespace = 'entities/assets/'
-//       myVuexMethodName = 'SOCKET_ON_VOLUME_CHANGE'
-//     }
-//     let myVuexMethodNameFull = myVuexNamespace + myVuexMethodName
-//     this.store[myVuexMethodType](myVuexMethodNameFull, msg)
-//   }
-// })
+vm.$connect('wss://ws.coincap.io/trades/binance', {
+  store: store,
+  format: 'json',
+  reconnection: true,
+  connectManually: true,
+  passToStoreHandler: function (eventName, event) {
+    if (!eventName.startsWith('SOCKET_')) { return }
+    // console.log(event.data); console.log('^...event.data:')
+    let msg = event.data ? JSON.parse(event.data) : {}
+
+    let myVuexMethodType = 'commit'             // по умолчанию вызывается мутация
+    let myVuexNamespace = ''                    // по умолчанию корневой модуль
+    let myVuexMethodName = eventName.toUpperCase()
+
+    if (
+      eventName === 'SOCKET_onmessage'
+    ) {
+      myVuexMethodType = 'dispatch' // вызывает экшн
+      myVuexNamespace = 'entities/assets/'
+      myVuexMethodName = 'SOCKET_ON_VOLUME_CHANGE'
+    }
+    let myVuexMethodNameFull = myVuexNamespace + myVuexMethodName
+    this.store[myVuexMethodType](myVuexMethodNameFull, msg)
+  }
+})

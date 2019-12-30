@@ -10,7 +10,7 @@ export default class Exchange extends Model {
       // предполагаю что по этому значению нужно коннектиться к сокету
       exchangeId: this.string(''),
       name: this.string(''),
-      socket: this.string(''),
+      socket: this.boolean(false),
     }
   }
 }

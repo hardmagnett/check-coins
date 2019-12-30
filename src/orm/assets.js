@@ -24,6 +24,7 @@ export default {
 
     SOCKET_ON_VOLUME_CHANGE (state, message)  {
       console.log(message); console.log('^...message in action in entities:')
+      // console.log(message.direction)
     },
     async fetchForPaginationTable ({ state, commit, dispatch }) {
       let response = await coinApi.get('assets', {params: {
