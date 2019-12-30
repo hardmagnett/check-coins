@@ -33,6 +33,7 @@
   import CoinTableLine from '@/components/CoinTableLine'
 
   import Asset from '@/orm/Asset'
+  import Exchange from '@/orm/Exchange'
 
 
 
@@ -52,6 +53,9 @@
           $state.complete();	// значит больше загружать нельзя
         }
       },
+    },
+    async mounted(){
+      await Exchange.dispatch('fetch')
     }
   }
 </script>

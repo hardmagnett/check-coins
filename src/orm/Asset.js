@@ -12,7 +12,6 @@ import numbro from 'numbro'
 export default class Asset extends Model {
   static entity = 'assets'
 
-  //The argument is the default value
   static fields () {
     return {
       // например `bitcoin`
