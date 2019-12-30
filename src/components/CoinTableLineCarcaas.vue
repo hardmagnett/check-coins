@@ -19,7 +19,11 @@
     <div class="coin-table-line-carcaas__market-cap">
       <slot name="market-cap"/>
     </div>
-    <div class="coin-table-line-carcaas__volumeUsd24Hr">
+    <div class="coin-table-line-carcaas__volumeUsd24Hr"
+         :class="{
+          'mod--flash-success-trade': isNewDealJustFinished,
+         }"
+         @animationend="finishFlashAnimationTrade">
       <slot name="volumeUsd24Hr"/>
     </div>
   </div>
@@ -31,7 +35,8 @@ export default {
   data: function(){
     return {
       isPriceJustIncreased: false,
-      isPriceJustDecreased: false
+      isPriceJustDecreased: false,
+      isNewDealJustFinished: false
     }
   },
   methods: {
@@ -41,9 +46,15 @@ export default {
     highlightPriceDecrease() {
       this.isPriceJustDecreased = true
     },
+    highlightNewTrade() {
+      this.isNewDealJustFinished = true
+    },
     finishFlashAnimation(){
       this.isPriceJustIncreased = false
       this.isPriceJustDecreased = false
+    },
+    finishFlashAnimationTrade(){
+      this.isNewDealJustFinished = false
     }
   }
 }
@@ -110,6 +121,9 @@ export default {
   }
 
 
+  .mod--flash-success-trade {
+    animation: flash-success 0.2s
+  }
   .mod--flash-success {
     animation: flash-success 1s
   }

@@ -47,14 +47,15 @@ export default {
     }
   },
   watch: {
-    // 'asset.priceUsd': function(newVal, oldVal){
     'asset.priceUsdHumanVisible': function(newVal, oldVal){
       if (newVal > oldVal){
         this.$refs.carcaas.highlightPriceIncrease()
       } else {
         this.$refs.carcaas.highlightPriceDecrease()
       }
-
+    },
+    'asset.tradesCounter': function(newVal, oldVal){
+      this.$refs.carcaas.highlightNewTrade()
     }
   }
 }

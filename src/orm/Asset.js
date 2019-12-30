@@ -26,6 +26,9 @@ export default class Asset extends Model {
       priceUsd: this.number(0),
       marketCapUsd: this.number(0),
       volumeUsd24Hr: this.number(0),
+
+      // синтетическое поле чтобы подсвечивать появление новой операции
+      tradesCounter: this.number(0)
     }
   }
 
