@@ -9,6 +9,7 @@ export default {
 
   actions: {
     SOCKET_ON_PRICE_CHANGE (state, newPrices)  {
+
       let dataToUpdate = []
       for (let coinName in newPrices) {
         let coinNewPrice = newPrices[coinName];
@@ -17,12 +18,14 @@ export default {
           priceUsd: coinNewPrice
         })
       }
+      return
       Asset.update({
         data: dataToUpdate
       })
     },
 
     SOCKET_ON_VOLUME_CHANGE (state, message)  {
+      return
       Asset.update({
         where: (asset) => {
           return [message.base, message.quote].includes(asset.id)

@@ -26,10 +26,6 @@ Vue.use(VueNativeSock, 'wss://ws.coincap.io/prices?assets=ALL', {
     let myVuexMethodName = eventName.toUpperCase()
 
     if (
-      // если сообщение пришло из вебсокета о стоимости валюты
-      // возможно эта проверка будет не нужна пушо урл и так указан в опциях.
-      event.target.url.indexOf('ws.coincap.io/prices') !== -1
-      &&
       eventName === 'SOCKET_onmessage'
     ) {
       myVuexMethodType = 'dispatch' // вызывает экшн
