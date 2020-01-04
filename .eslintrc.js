@@ -13,6 +13,7 @@ module.exports = {
     "no-unused-vars": "warn",
     "no-unreachable": "warn",
     "no-constant-condition": "warn",
+    "no-empty": "warn",
     'vue/no-unused-vars': 'warn'
   },
   parserOptions: {
