@@ -38,9 +38,23 @@ export default {
   state: {
     assetsPaginationIds: [],
 
-    // {'bitcoin': {lastUpdateTS: timestamp}}
+    /**
+     * Пример содержания:  {'bitcoin': {lastUpdateTS: timestamp}}
+     */
     assetVolumeChangeCounerUpdages: {},
+    /**
+     * Пример содержания: ['bitcoin']
+     */
     visibleAssetIdsForTable: [],
+
+    /**
+     * Данные записываются сюда
+     * когда пришла новая цена, но валюта не выведена в таблице (например непроскроллено).
+     * Данные удаляются отсюда
+     * когда валюта становится видимой в таблице (например пользователь доскроллил до валюты)
+     * Пример содержания: {'bitcoin': {notUpdatedPrice: Number}}
+     */
+    notYetUpdatedPrices: {},
   },
 
   actions: {
@@ -49,7 +63,7 @@ export default {
     SOCKET_ON_PRICE_CHANGE({ commit }, newPrices) {
       for (const coinId in newPrices) {
         console.log(coinId)
-        if (coinId !== 'bitcoin') return
+        if (coinId !== 'bitcoin') continue
 
         const coinNewPrice = newPrices[coinId]
         commit('updatePriceUsd', {
@@ -117,12 +131,21 @@ export default {
     },
 
     updatePriceUsd(state, { coinId, coinNewPrice }) {
-      Asset.update({
-        data: {
-          id: coinId,
-          priceUsd: coinNewPrice,
-        },
-      })
+      const isCoinVisibleNow = state.visibleAssetIdsForTable.includes(coinId)
+
+      if (isCoinVisibleNow) {
+        Asset.update({
+          data: {
+            id: coinId,
+            priceUsd: coinNewPrice,
+          },
+        })
+      } else {
+        // записать новое значение в переменную
+        // notYetUpdatedPrices
+      }
+
+
     },
     updateVolumeChangeCounter(state, { coinId }) {
       // Если обьем продаж не выводится на данном разрешении экрана то и не показывать операцию вовсе.
