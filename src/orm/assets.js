@@ -12,6 +12,7 @@ let vuexModuleHelpers = {
 
   canUpdateVolumeChangeCounter: function(state, coinId) {
     const msForCoin = 5000
+    // const msForCoin = 150000
     // return true
     // console.log(state); console.log('^...state:')
     let now = Date.now()
@@ -40,7 +41,8 @@ export default {
     assetsPaginationIds: [],
 
     // {'bitcoin': {lastUpdateTS: timestamp}}
-    assetVolumeChangeCounerUpdages: {}
+    assetVolumeChangeCounerUpdages: {},
+    visibleAssetIdsForTable: []
   },
 
   actions: {
@@ -63,36 +65,43 @@ export default {
           priceUsd: coinNewPrice
         })
       }
-      // return
-      // Asset.update({
-      //   data: dataToUpdate
-      // })
+      return
+      Asset.update({
+        data: dataToUpdate
+      })
     },
 
-    // SOCKET_ON_VOLUME_CHANGE: _wrap(
-    //   _memoize(
-    //     function(state, message) {
-    //       return _debounce(save,
-    //         1000,
-    //         {maxWait: 1000}
-    //       );
-    //     },
-    //     _property('id')
-    //   ),
-    //   function(func, obj) {
-    //     return func(obj)(obj);
-    //   }
-    // ),
     // todo: здесь нужна мега-оптимизация
     SOCKET_ON_VOLUME_CHANGE ({ commit }, message)  {
       // if (message.base !== 'bitcoin' && message.quote !== 'bicoin') return
-      // return
+      return
       commit('updateVolumeChangeCounter', {coinId: message.base})
       commit('updateVolumeChangeCounter', {coinId: message.quote})
     },
+    /**
+     *
+     * @param state
+     * @param assetId   Number
+     */
+    addVisibleAssetIdForTable(state, {assetId}){
+      Asset.commit((state) => {
+        state.visibleAssetIdsForTable.push(assetId)
+      })
+    },
+    /**
+     *
+     * @param state
+     * @param assetId   Number
+     */
+    removeVisibleAssetIdForTable(state, {assetId}){
+      Asset.commit((state) => {
+        state.visibleAssetIdsForTable =
+          state.visibleAssetIdsForTable.filter((id) => id !== assetId)
+      })
+    },
     async fetchForPaginationTable ({ state, commit, dispatch }) {
       let response = await coinApi.get('assets', {params: {
-        limit: 50,
+        limit: 100,
         offset: state.assetsPaginationIds.length
       }})
 
@@ -122,10 +131,13 @@ export default {
     updateVolumeChangeCounter (state, {coinId}) {
       // console.log(this); console.log('^...this:')
       // console.log('------------')
+      // сначала должна быть проверка на реальное наличие в числе видимых сейчас элементов
+      if (!state.assetsPaginationIds.includes(coinId)) return
+      // и только если видимый тогда делать проверку на то насколько давно он посдедний раз обновлялся.
       if (!vuexModuleHelpers.canUpdateVolumeChangeCounter(state, coinId)) return
       // console.log('really processing1')
-      if (!state.assetsPaginationIds.includes(coinId)) return
-      console.log('really processing2')
+
+      // console.log('really processing2')
       Asset.update({
         where: coinId,
         data (asset) {

@@ -57,6 +57,12 @@ export default {
     'asset.tradesCounter': function(newVal, oldVal){
       this.$refs.carcaas.highlightNewTrade()
     }
+  },
+  async beforeDestroy() {
+    await Asset.dispatch('removeVisibleAssetIdForTable' , {assetId: this.asset.id})
+  },
+  async mounted(){
+    await Asset.dispatch('addVisibleAssetIdForTable' , {assetId: this.asset.id})
   }
 }
 </script>

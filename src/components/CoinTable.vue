@@ -15,6 +15,7 @@
           :asset="asset"
         ></coin-table-line>
         <infinite-loading
+          :distance="1000"
           @infinite="infiniteHandler"
         >
           <span slot="no-results"></span>
