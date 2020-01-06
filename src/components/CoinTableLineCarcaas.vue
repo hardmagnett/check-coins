@@ -110,24 +110,6 @@ export default {
     flex: 0 0 130px;
     justify-content: flex-end;
   }
-/*  .coin-table-line-carcaas__rank,
-  .coin-table-line-carcaas__market-cap,
-  .coin-table-line-carcaas__volumeUsd24Hr
-  {
-    display: none;
-  }
-  @media (min-width: $bpSm) {
-    .coin-table-line-carcaas__rank {
-      display: flex;
-    }
-  }
-  @media (min-width: $bpSm2) {
-    .coin-table-line-carcaas__market-cap,
-    .coin-table-line-carcaas__volumeUsd24Hr {
-      display: flex;
-    }
-  }*/
-
 
   .mod--flash-success-trade {
     animation: flash-success 0.2s
