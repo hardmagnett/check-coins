@@ -4,7 +4,7 @@
     <div class="coin-table__lines global-mod--with-cool-scrollbar">
       <virtual-list
         :size="69"
-        :remain="20"
+        :remain="15"
 
         style="max-height: 100%;"
         class="global-mod--with-cool-scrollbar"

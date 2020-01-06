@@ -10,11 +10,8 @@ import _, {
 } from 'lodash'
 let vuexModuleHelpers = {
 
-  canUpdateVolumeChangeCounter: function(state, coinId) {
+  canUpdateVolumeChangeCounterByInterval: function(state, coinId) {
     const msForCoin = 5000
-    // const msForCoin = 150000
-    // return true
-    // console.log(state); console.log('^...state:')
     let now = Date.now()
     let result = false
     if (!state.assetVolumeChangeCounerUpdages[coinId]) {
@@ -74,7 +71,7 @@ export default {
     // todo: здесь нужна мега-оптимизация
     SOCKET_ON_VOLUME_CHANGE ({ commit }, message)  {
       // if (message.base !== 'bitcoin' && message.quote !== 'bicoin') return
-      return
+      // return
       commit('updateVolumeChangeCounter', {coinId: message.base})
       commit('updateVolumeChangeCounter', {coinId: message.quote})
     },
@@ -129,15 +126,13 @@ export default {
       state.assetsPaginationIds = [...state.assetsPaginationIds, ...newIds]
     },
     updateVolumeChangeCounter (state, {coinId}) {
-      // console.log(this); console.log('^...this:')
-      // console.log('------------')
-      // сначала должна быть проверка на реальное наличие в числе видимых сейчас элементов
-      if (!state.assetsPaginationIds.includes(coinId)) return
-      // и только если видимый тогда делать проверку на то насколько давно он посдедний раз обновлялся.
-      if (!vuexModuleHelpers.canUpdateVolumeChangeCounter(state, coinId)) return
-      // console.log('really processing1')
 
-      // console.log('really processing2')
+      // если монета не видна сейчас в таблице, то не нужно показывать операцию
+      if (!state.visibleAssetIdsForTable.includes(coinId)) return
+      // если только уже была операция, то не показывать ещё одну операцию
+      if (!vuexModuleHelpers.canUpdateVolumeChangeCounterByInterval(state, coinId)) return
+
+      // показать операцию
       Asset.update({
         where: coinId,
         data (asset) {

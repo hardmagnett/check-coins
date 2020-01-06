@@ -30,7 +30,7 @@
 </template>
 
 <script>
-
+// todo: навести порядок с анимациями.
 export default {
   data: function(){
     return {
