@@ -22,14 +22,14 @@
 
 <script>
 
-import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas'
+import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas';
 
 
 export default {
   components: {
-    CoinTableLineCarcaas
-  }
-}
+    CoinTableLineCarcaas,
+  },
+};
 </script>
 
 <style scoped lang="scss">

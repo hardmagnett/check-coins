@@ -1,10 +1,4 @@
-import _memoize from 'lodash/memoize'
-
-let square = function (number){
-  return number * number
-}
-
-let squareMemoized = _memoize(square)
+import _memoize from 'lodash/memoize';
 
 // squareMemoized(2) // вызовется
 // squareMemoized(3) // вызовется
@@ -14,46 +8,48 @@ let squareMemoized = _memoize(square)
 // squareMemoized(3) // вернет закешированный результат
 
 
-//////////////////////////////////
-import _wrap from 'lodash/wrap'
+// ////////////////////////////////
+import _wrap from 'lodash/wrap'; // Вася is Cool guy, Musician
 
-let describeMan = function(name, description, description2 = ''){
-  return `${name} is ${description}, ${description2}`
-}
-let describeVasya = _wrap('Вася', describeMan)
-
-describeVasya('Cool guy')               //Вася is Cool guy,
-describeVasya('Cool guy', 'Musician')  //Вася is Cool guy, Musician
-
-////////////////////////
+// //////////////////////
 // import _property from 'lodash/property'
 // let object = { 'a': { 'b': 2 } }
 // let getAB = _property('a.b')
 // let value = getAB(object)
 // console.log(value); console.log('^...value:')
 
-///
+// /
 
-///
-import _ from 'lodash'
+// /
+import _ from 'lodash';
+
+const square = function (number) {
+  return number * number;
+};
+
+const squareMemoized = _memoize(square);
+
+const describeMan = function (name, description, description2 = '') {
+  return `${name} is ${description}, ${description2}`;
+};
+const describeVasya = _wrap('Вася', describeMan);
+
+describeVasya('Cool guy'); // Вася is Cool guy,
+describeVasya('Cool guy', 'Musician');
 
 
 function save(obj) {
   console.log('saving', obj.name);
 }
 
-let saveDebounced = _.wrap(
+const saveDebounced = _.wrap(
   _.memoize(
-    function() {
-      return _.debounce(save, 1000,{
-        maxWait: 1000
-      });
-    },
-    _.property('id')
+    () => _.debounce(save, 1000, {
+      maxWait: 1000,
+    }),
+    _.property('id'),
   ),
-  function(func, obj) {
-    return func(obj)(obj);
-  }
+  (func, obj) => func(obj)(obj),
 );
 
 // function sleep(ms) {ms += new Date().getTime();while (new Date() < ms){}}
@@ -61,12 +57,12 @@ let saveDebounced = _.wrap(
 // saveDebounced({ id: 1, name: 'Jim' });
 // saveDebounced({ id: 2, name: 'Jane' });
 // saveDebounced({ id: 1, name: 'James' });
-let i = 0
-let body = document.body
-body.addEventListener('click', ()=>{
-  console.log('======clicked')
-  saveDebounced({ id: 1, name: `James ${i}` })
-})
+const i = 0;
+const { body } = document;
+body.addEventListener('click', () => {
+  console.log('======clicked');
+  saveDebounced({ id: 1, name: `James ${i}` });
+});
 // setInterval(()=>{
 //   i += 1
 //   console.log(`here----------------------------------${i}`)
@@ -85,7 +81,7 @@ body.addEventListener('click', ()=>{
 //   saveDebounced({ id: 1, name: `Josh ${i}` });
 // }
 
-//////////////////////////////////////////////////////////////
+// ////////////////////////////////////////////////////////////
 
 /**
  *
@@ -96,25 +92,24 @@ body.addEventListener('click', ()=>{
  * @param func
  * @returns {*}
  */
-let debounceByKey = function (cacheKey, func){
+const debounceByKey = function (cacheKey, func) {
   // return _.debounce(func, 150)
-  return func
+  return func;
   // console.dir(func)
   // return func.bind(this, {id:3, name:'lars'})
   // return _.wrap()
-}
+};
 
-let doSomethingWithObject = function(object){
-  console.log(object); console.log('^...object:')
-}
+const doSomethingWithObject = function (object) {
+  console.log(object); console.log('^...object:');
+};
 
-let object1 = {id: 1, name: 'James'}
-let object2 = {id: 2, name: 'Kirk'}
-
+const object1 = { id: 1, name: 'James' };
+const object2 = { id: 2, name: 'Kirk' };
 
 
 // doSomethingWithObject(object1)
 
-let doSomethingWithObjectDebounced = debounceByKey(object1.id, doSomethingWithObject)
+const doSomethingWithObjectDebounced = debounceByKey(object1.id, doSomethingWithObject);
 // let doSomethingWithObjectDebounced = debounceByKey(doSomethingWithObject)
 // doSomethingWithObjectDebounced(object1.id, object1)

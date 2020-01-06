@@ -4,35 +4,37 @@
       v-if="$screen.showInTableColumnRank"
       class="coin-table-line-carcaas__rank"
     >
-      <slot name="rank"/>
+      <slot name="rank" />
     </div>
     <div class="coin-table-line-carcaas__name">
-      <slot name="name"/>
+      <slot name="name" />
     </div>
-    <div class="coin-table-line-carcaas__pusher"></div>
-    <div class="coin-table-line-carcaas__price"
-         :class="{
-          'mod--flash-success': isPriceJustIncreased,
-          'mod--flash-error': isPriceJustDecreased
-         }"
-         @animationend="finishFlashAnimation"
+    <div class="coin-table-line-carcaas__pusher" />
+    <div
+      class="coin-table-line-carcaas__price"
+      :class="{
+        'mod--flash-success': isPriceJustIncreased,
+        'mod--flash-error': isPriceJustDecreased
+      }"
+      @animationend="finishFlashAnimation"
     >
-      <slot name="price"/>
+      <slot name="price" />
     </div>
     <div
       v-if="$screen.showInTableColumnMarketCap"
       class="coin-table-line-carcaas__market-cap"
     >
-      <slot name="market-cap"/>
+      <slot name="market-cap" />
     </div>
     <div
       v-if="$screen.showInTableColumnVolume24Hr"
       class="coin-table-line-carcaas__volumeUsd24Hr"
-         :class="{
-          'mod--flash-success-trade': isNewDealJustFinished,
-         }"
-         @animationend="finishFlashAnimationTrade">
-      <slot name="volumeUsd24Hr"/>
+      :class="{
+        'mod--flash-success-trade': isNewDealJustFinished,
+      }"
+      @animationend="finishFlashAnimationTrade"
+    >
+      <slot name="volumeUsd24Hr" />
     </div>
   </div>
 </template>
@@ -40,32 +42,32 @@
 <script>
 // todo: навести порядок с анимациями.
 export default {
-  data: function(){
+  data() {
     return {
       isPriceJustIncreased: false,
       isPriceJustDecreased: false,
-      isNewDealJustFinished: false
-    }
+      isNewDealJustFinished: false,
+    };
   },
   methods: {
     highlightPriceIncrease() {
-      this.isPriceJustIncreased = true
+      this.isPriceJustIncreased = true;
     },
     highlightPriceDecrease() {
-      this.isPriceJustDecreased = true
+      this.isPriceJustDecreased = true;
     },
     highlightNewTrade() {
-      this.isNewDealJustFinished = true
+      this.isNewDealJustFinished = true;
     },
-    finishFlashAnimation(){
-      this.isPriceJustIncreased = false
-      this.isPriceJustDecreased = false
+    finishFlashAnimation() {
+      this.isPriceJustIncreased = false;
+      this.isPriceJustDecreased = false;
     },
-    finishFlashAnimationTrade(){
-      this.isNewDealJustFinished = false
-    }
-  }
-}
+    finishFlashAnimationTrade() {
+      this.isNewDealJustFinished = false;
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">

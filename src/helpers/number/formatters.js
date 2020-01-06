@@ -4,36 +4,36 @@ export default {
    * @param number
    * @returns {string}
    */
-  withSuffix(number){
-    let suffix = ''
-    let result = number
-    const billion = 1000000000
-    const million = 1000000
-    const thousand = 1000
+  withSuffix(number) {
+    let suffix = '';
+    let result = number;
+    const billion = 1000000000;
+    const million = 1000000;
+    const thousand = 1000;
     if (result >= billion) {
-      result = result / billion
-      suffix = 'b'
+      result /= billion;
+      suffix = 'b';
     } else if (result >= million) {
-      result = result / million
-      suffix = 'm'
+      result /= million;
+      suffix = 'm';
     } else if (result >= thousand) {
-      result = result / thousand
-      suffix = 'k'
+      result /= thousand;
+      suffix = 'k';
     }
 
-    let maximumFractionDigits = this.getFractionByNumber(number)
-    result = this.withPunctuation(result, maximumFractionDigits)
-    result = `${result}${suffix}`
+    const maximumFractionDigits = this.getFractionByNumber(number);
+    result = this.withPunctuation(result, maximumFractionDigits);
+    result = `${result}${suffix}`;
 
-    return result
+    return result;
   },
   /**
    * '128.98b' => '$ 128.98b'
    * @param string
    * @returns {string}
    */
-  withCurrencySign(string){
-    return `$ ${string}`
+  withCurrencySign(string) {
+    return `$ ${string}`;
   },
 
   /**
@@ -42,8 +42,8 @@ export default {
    * @param number
    * @returns {number}
    */
-  getFractionByNumber(number){
-    return number > 1 ? 2 : 8
+  getFractionByNumber(number) {
+    return number > 1 ? 2 : 8;
   },
   /**
    * 7223.454343291271 => 7,223.45
@@ -51,11 +51,11 @@ export default {
    * @param fractionQty
    * @returns {string}
    */
-  withPunctuation(number, fractionQty){
-    let result = number.toLocaleString(
+  withPunctuation(number, fractionQty) {
+    const result = number.toLocaleString(
       'en-GB',
-      {maximumFractionDigits: fractionQty}
-    )
-    return result
-  }
-}
+      { maximumFractionDigits: fractionQty },
+    );
+    return result;
+  },
+};

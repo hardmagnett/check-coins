@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <slot/>
+    <slot />
   </div>
 </template>
 
@@ -8,7 +8,7 @@
 
 export default {
 
-}
+};
 </script>
 
 <style scoped lang="scss">

@@ -7,41 +7,45 @@
     >
 
     <div class="coin-details__texts">
-      <p class="coin-details__name">{{asset.name}}</p>
-      <p class="text text--small coin-details__code">{{asset.symbol}}</p>
+      <p class="coin-details__name">
+        {{ asset.name }}
+      </p>
+      <p class="text text--small coin-details__code">
+        {{ asset.symbol }}
+      </p>
     </div>
   </div>
 </template>
 
 <script>
 
-import Asset from '@/orm/Asset'
+import Asset from '@/orm/Asset';
 
 export default {
   props: {
     asset: {
       type: Asset,
-      required: true
-    }
+      required: true,
+    },
   },
-  data(){
-    return{
-      tempCode: 'USDC'
-    }
+  data() {
+    return {
+      tempCode: 'USDC',
+    };
   },
   computed: {
-    imgUrl(){
-      let codeLC = this.asset.symbol.toLowerCase()
+    imgUrl() {
+      const codeLC = this.asset.symbol.toLowerCase();
       return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`;
     },
 
   },
   methods: {
-    fakeImgUrl(event){
-      event.target.src = 'https://coincap.io/static/logo_mark.png'
-    }
-  }
-}
+    fakeImgUrl(event) {
+      event.target.src = 'https://coincap.io/static/logo_mark.png';
+    },
+  },
+};
 </script>
 
 <style scoped lang="scss">
