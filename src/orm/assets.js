@@ -8,6 +8,7 @@ import _, {
   property as _property,
   wrap as _wrap
 } from 'lodash'
+import logger from "vuex/dist/logger"
 let vuexModuleHelpers = {
 
   canUpdateVolumeChangeCounterByInterval: function(state, coinId) {
@@ -127,8 +128,14 @@ export default {
     },
     updateVolumeChangeCounter (state, {coinId}) {
 
+      // Если обьем продаж не выводится на данном разрешении то и не показывать операцию вовсе.
+      // Вообще нехорошо в vuex делать что-либо касательно рендеринга,
+      // но учитывая что рендеринг довольно тяжелый - здесь - самое место для этой проверки.
+      if (!this._vm.$screen.showInTableColumnVolume24Hr) return
+
       // если монета не видна сейчас в таблице, то не нужно показывать операцию
       if (!state.visibleAssetIdsForTable.includes(coinId)) return
+      
       // если только уже была операция, то не показывать ещё одну операцию
       if (!vuexModuleHelpers.canUpdateVolumeChangeCounterByInterval(state, coinId)) return
 

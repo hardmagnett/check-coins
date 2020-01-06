@@ -4,8 +4,10 @@
       ref="carcaas"
     >
       <template v-slot:rank>
-        <p
-        >{{asset.rank}}</p>
+        <p>
+          {{$screen.bpMd}}
+          {{asset.rank}}
+        </p>
       </template>
       <template v-slot:name>
         <coin-details :asset="asset"/>

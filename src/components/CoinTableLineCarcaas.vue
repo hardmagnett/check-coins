@@ -1,6 +1,9 @@
 <template>
   <div class="coin-table-line-carcaas">
-    <div class="coin-table-line-carcaas__rank">
+    <div
+      v-if="$screen.showInTableColumnRank"
+      class="coin-table-line-carcaas__rank"
+    >
       <slot name="rank"/>
     </div>
     <div class="coin-table-line-carcaas__name">
@@ -16,10 +19,15 @@
     >
       <slot name="price"/>
     </div>
-    <div class="coin-table-line-carcaas__market-cap">
+    <div
+      v-if="$screen.showInTableColumnMarketCap"
+      class="coin-table-line-carcaas__market-cap"
+    >
       <slot name="market-cap"/>
     </div>
-    <div class="coin-table-line-carcaas__volumeUsd24Hr"
+    <div
+      v-if="$screen.showInTableColumnVolume24Hr"
+      class="coin-table-line-carcaas__volumeUsd24Hr"
          :class="{
           'mod--flash-success-trade': isNewDealJustFinished,
          }"
@@ -102,7 +110,7 @@ export default {
     flex: 0 0 130px;
     justify-content: flex-end;
   }
-  .coin-table-line-carcaas__rank,
+/*  .coin-table-line-carcaas__rank,
   .coin-table-line-carcaas__market-cap,
   .coin-table-line-carcaas__volumeUsd24Hr
   {
@@ -118,7 +126,7 @@ export default {
     .coin-table-line-carcaas__volumeUsd24Hr {
       display: flex;
     }
-  }
+  }*/
 
 
   .mod--flash-success-trade {
