@@ -45,32 +45,21 @@ export default {
 
   actions: {
     // todo
-    // эта штука и так работает немного быстрее чем coincap.
-    // но для небольшого прироста производительности нужно делать:
-    // 1 - реконнект с обновлением данных какие валюты нужно получать
     // 2 - сделать максимальную частоту обновления раз в 3 секунды
-    SOCKET_ON_PRICE_CHANGE(state, newPrices) {
-      const dataToUpdate = []
-      for (const coinName in newPrices) {
-        // console.log(coinName)
-        if (coinName === 'ethereum') {
-          // console.log('new ethereum price')
-        }
-        const coinNewPrice = newPrices[coinName]
-        dataToUpdate.push({
-          id: coinName,
+    SOCKET_ON_PRICE_CHANGE({ commit }, newPrices) {
+      for (const coinId in newPrices) {
+        console.log(coinId)
+        if (coinId !== 'bitcoin') return
+
+        const coinNewPrice = newPrices[coinId]
+        commit('updatePriceUsd', {
+          id: coinId,
           priceUsd: coinNewPrice,
         })
       }
-      return
-      Asset.update({
-        data: dataToUpdate,
-      })
     },
 
-    // todo: здесь нужна мега-оптимизация
     SOCKET_ON_VOLUME_CHANGE({ commit }, message) {
-      // if (message.base !== 'bitcoin' && message.quote !== 'bicoin') return
       // return
       commit('updateVolumeChangeCounter', { coinId: message.base })
       commit('updateVolumeChangeCounter', { coinId: message.quote })
@@ -126,10 +115,19 @@ export default {
     addAssetsPaginationIds(state, { newIds }) {
       state.assetsPaginationIds = [...state.assetsPaginationIds, ...newIds]
     },
+
+    updatePriceUsd(state, { coinId, coinNewPrice }) {
+      Asset.update({
+        data: {
+          id: coinId,
+          priceUsd: coinNewPrice,
+        },
+      })
+    },
     updateVolumeChangeCounter(state, { coinId }) {
-      // Если обьем продаж не выводится на данном разрешении то и не показывать операцию вовсе.
-      // Вообще нехорошо в vuex делать что-либо касательно рендеринга,
-      // но учитывая что рендеринг довольно тяжелый - здесь - самое место для этой проверки.
+      // Если обьем продаж не выводится на данном разрешении экрана то и не показывать операцию вовсе.
+      // Вообще нехорошо в vuex делать что-либо касательно view-рендеринга,
+      // но учитывая что рендеринг довольно тяжелый - здесь - самое оптимальное место для этой проверки.
       if (!this._vm.$screen.showInTableColumnVolume24Hr) return
 
       // если монета не видна сейчас в таблице, то не нужно показывать операцию

@@ -1,23 +1,15 @@
 <template>
   <div class="coin-table-line">
-    <coin-table-line-carcaas
-      ref="carcaas"
-    >
+    <coin-table-line-carcaas ref="carcaas">
       <template v-slot:rank>
-        <p>
-          {{ $screen.bpMd }}
-          {{ asset.rank }}
-        </p>
+        <p>{{ asset.rank }}</p>
       </template>
       <template v-slot:name>
         <coin-details :asset="asset" />
       </template>
       <template v-slot:price>
-        <p>
-          {{ asset.priceUsdHumanReadable }}
-        </p>
+        <p>{{ asset.priceUsdHumanReadable }}</p>
       </template>
-
       <template v-slot:market-cap>
         <p>{{ asset.marketCapUsdHumanReadable }}	</p>
       </template>
@@ -48,13 +40,17 @@ export default {
   },
   watch: {
     'asset.priceUsdHumanVisible': function (newVal, oldVal) {
+      // newVal > oldVal
+      //   ? this.$refs.carcaas.highlightPriceIncrease()
+      //   : this.$refs.carcaas.highlightPriceDecrease()
+
       if (newVal > oldVal) {
         this.$refs.carcaas.highlightPriceIncrease()
       } else {
         this.$refs.carcaas.highlightPriceDecrease()
       }
     },
-    'asset.tradesCounter': function (newVal, oldVal) {
+    'asset.tradesCounter': function () {
       this.$refs.carcaas.highlightNewTrade()
     },
   },
