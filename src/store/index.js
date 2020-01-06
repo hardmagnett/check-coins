@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import VuexORM from '@vuex-orm/core';
-import database from '@/orm/database';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import VuexORM from '@vuex-orm/core'
+import database from '@/orm/database'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {},
@@ -18,9 +18,9 @@ export default new Vuex.Store({
   },
   actions: {
     SOCKET_ON_PRICE_CHANGE(state, message) {
-      console.log(message); console.log('^...message in action:');
+      console.log(message); console.log('^...message in action:')
     },
   },
   modules: {},
   plugins: [VuexORM.install(database)],
-});
+})

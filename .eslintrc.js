@@ -19,6 +19,7 @@ module.exports = {
     'no-shadow': 'warn',
     'guard-for-in': 'warn',
     'no-tabs': 'warn',
+    'semi': ['warn', 'never'],
     'no-restricted-syntax': 'off',
     'func-names': 'off',
     'max-len': 'off',
@@ -32,4 +33,4 @@ module.exports = {
   parserOptions: {
     parser: 'babel-eslint',
   },
-};
+}

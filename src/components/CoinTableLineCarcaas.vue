@@ -47,27 +47,27 @@ export default {
       isPriceJustIncreased: false,
       isPriceJustDecreased: false,
       isNewDealJustFinished: false,
-    };
+    }
   },
   methods: {
     highlightPriceIncrease() {
-      this.isPriceJustIncreased = true;
+      this.isPriceJustIncreased = true
     },
     highlightPriceDecrease() {
-      this.isPriceJustDecreased = true;
+      this.isPriceJustDecreased = true
     },
     highlightNewTrade() {
-      this.isNewDealJustFinished = true;
+      this.isNewDealJustFinished = true
     },
     finishFlashAnimation() {
-      this.isPriceJustIncreased = false;
-      this.isPriceJustDecreased = false;
+      this.isPriceJustIncreased = false
+      this.isPriceJustDecreased = false
     },
     finishFlashAnimationTrade() {
-      this.isNewDealJustFinished = false;
+      this.isNewDealJustFinished = false
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

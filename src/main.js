@@ -1,13 +1,13 @@
-import 'normalize.css';
+import 'normalize.css'
 
 
-import Vue from 'vue';
-import InfiniteLoading from 'vue-infinite-loading';
-import VueNativeSock from 'vue-native-websocket';
-import VueScreen from 'vue-screen';
-import App from './App.vue';
-import router from './router';
-import store from './store';
+import Vue from 'vue'
+import InfiniteLoading from 'vue-infinite-loading'
+import VueNativeSock from 'vue-native-websocket'
+import VueScreen from 'vue-screen'
+import App from './App.vue'
+import router from './router'
+import store from './store'
 
 // вынести в отдельный файл
 
@@ -16,35 +16,35 @@ import store from './store';
 // Раньше у меня был собственный 'изобретенный велосипед' для данной функциональности
 // Но позже нашел эту библиотеку
 
-import './exps';
+import './exps'
 
-Vue.use(InfiniteLoading, {});
+Vue.use(InfiniteLoading, {})
 Vue.use(VueNativeSock, 'wss://ws.coincap.io/prices?assets=ALL', {
   store,
   format: 'json',
   reconnection: true,
   connectManually: true,
   passToStoreHandler(eventName, event) {
-    if (!eventName.startsWith('SOCKET_')) { return; }
-    const msg = event.data ? JSON.parse(event.data) : {};
+    if (!eventName.startsWith('SOCKET_')) { return }
+    const msg = event.data ? JSON.parse(event.data) : {}
 
-    let myVuexMethodType = 'commit'; // по умолчанию вызывается мутация
-    let myVuexNamespace = ''; // по умолчанию корневой модуль
-    let myVuexMethodName = eventName.toUpperCase();
+    let myVuexMethodType = 'commit' // по умолчанию вызывается мутация
+    let myVuexNamespace = '' // по умолчанию корневой модуль
+    let myVuexMethodName = eventName.toUpperCase()
 
     if (
       eventName === 'SOCKET_onmessage'
     ) {
-      myVuexMethodType = 'dispatch'; // вызывает экшн
-      myVuexNamespace = 'entities/assets/';
-      myVuexMethodName = 'SOCKET_ON_PRICE_CHANGE';
+      myVuexMethodType = 'dispatch' // вызывает экшн
+      myVuexNamespace = 'entities/assets/'
+      myVuexMethodName = 'SOCKET_ON_PRICE_CHANGE'
     }
-    const myVuexMethodNameFull = myVuexNamespace + myVuexMethodName;
-    this.store[myVuexMethodType](myVuexMethodNameFull, msg);
+    const myVuexMethodNameFull = myVuexNamespace + myVuexMethodName
+    this.store[myVuexMethodType](myVuexMethodNameFull, msg)
   },
-});
+})
 
-Vue.config.productionTip = false;
+Vue.config.productionTip = false
 
 Vue.use(VueScreen, {
   // Брекпоинты должны быть синхронны с теми что в variables.scss.
@@ -70,14 +70,14 @@ Vue.use(VueScreen, {
   showInTableColumnRank: (screen) => screen.bpSm,
   showInTableColumnMarketCap: (screen) => screen.bpSm2,
   showInTableColumnVolume24Hr: (screen) => screen.bpSm2,
-});
+})
 
 
 const vm = new Vue({
   router,
   store,
   render: (h) => h(App),
-}).$mount('#app');
+}).$mount('#app')
 
 // вынести в отдельный файл, а может быть и в отдельные ф-и коннекта и дисконнекта
-vm.$connect();
+vm.$connect()

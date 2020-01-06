@@ -5,27 +5,27 @@ export default {
    * @returns {string}
    */
   withSuffix(number) {
-    let suffix = '';
-    let result = number;
-    const billion = 1000000000;
-    const million = 1000000;
-    const thousand = 1000;
+    let suffix = ''
+    let result = number
+    const billion = 1000000000
+    const million = 1000000
+    const thousand = 1000
     if (result >= billion) {
-      result /= billion;
-      suffix = 'b';
+      result /= billion
+      suffix = 'b'
     } else if (result >= million) {
-      result /= million;
-      suffix = 'm';
+      result /= million
+      suffix = 'm'
     } else if (result >= thousand) {
-      result /= thousand;
-      suffix = 'k';
+      result /= thousand
+      suffix = 'k'
     }
 
-    const maximumFractionDigits = this.getFractionByNumber(number);
-    result = this.withPunctuation(result, maximumFractionDigits);
-    result = `${result}${suffix}`;
+    const maximumFractionDigits = this.getFractionByNumber(number)
+    result = this.withPunctuation(result, maximumFractionDigits)
+    result = `${result}${suffix}`
 
-    return result;
+    return result
   },
   /**
    * '128.98b' => '$ 128.98b'
@@ -33,7 +33,7 @@ export default {
    * @returns {string}
    */
   withCurrencySign(string) {
-    return `$ ${string}`;
+    return `$ ${string}`
   },
 
   /**
@@ -43,7 +43,7 @@ export default {
    * @returns {number}
    */
   getFractionByNumber(number) {
-    return number > 1 ? 2 : 8;
+    return number > 1 ? 2 : 8
   },
   /**
    * 7223.454343291271 => 7,223.45
@@ -55,7 +55,7 @@ export default {
     const result = number.toLocaleString(
       'en-GB',
       { maximumFractionDigits: fractionQty },
-    );
-    return result;
+    )
+    return result
   },
-};
+}

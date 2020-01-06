@@ -1,8 +1,8 @@
-import { Model } from '@vuex-orm/core';
+import { Model } from '@vuex-orm/core'
 
-import _round from 'lodash/round';
-import numbro from 'numbro';
-import numberFormatters from '@/helpers/number/formatters';
+import _round from 'lodash/round'
+import numbro from 'numbro'
+import numberFormatters from '@/helpers/number/formatters'
 
 
 /**
@@ -29,7 +29,7 @@ export default class Asset extends Model {
 
       // синтетическое поле чтобы подсвечивать появление новой операции
       tradesCounter: this.number(0),
-    };
+    }
   }
 
   /**
@@ -38,10 +38,10 @@ export default class Asset extends Model {
    * @returns {number}
    */
   get priceUsdHumanVisible() {
-    const maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd);
+    const maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
     // let result = this.priceUsd
-    const result = _round(this.priceUsd, maximumFractionDigits);
-    return result;
+    const result = _round(this.priceUsd, maximumFractionDigits)
+    return result
   }
 
   /**
@@ -49,30 +49,30 @@ export default class Asset extends Model {
    * @returns {*|string}
    */
   get priceUsdHumanReadable() {
-    const maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd);
+    const maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
     let result = numbro(this.priceUsdHumanVisible).format({
       thousandSeparated: true,
       mantissa: maximumFractionDigits,
-    });
-    result = numberFormatters.withCurrencySign(result);
-    return result;
+    })
+    result = numberFormatters.withCurrencySign(result)
+    return result
   }
 
   get volumeUsd24HrHumanReadable() {
-    if (this.volumeUsd24Hr === 0) return '-';
-    let result = numberFormatters.withSuffix(this.volumeUsd24Hr);
-    result = numberFormatters.withCurrencySign(result);
-    return result;
+    if (this.volumeUsd24Hr === 0) return '-'
+    let result = numberFormatters.withSuffix(this.volumeUsd24Hr)
+    result = numberFormatters.withCurrencySign(result)
+    return result
   }
 
   get marketCapUsdHumanReadable() {
-    if (this.marketCapUsd === 0) return '-';
+    if (this.marketCapUsd === 0) return '-'
     let result = numbro(this.marketCapUsd).format({
       average: true,
       thousandSeparated: true,
       mantissa: 2,
-    });
-    result = numberFormatters.withCurrencySign(result);
-    return result;
+    })
+    result = numberFormatters.withCurrencySign(result)
+    return result
   }
 }

@@ -1,4 +1,4 @@
-import _memoize from 'lodash/memoize';
+import _memoize from 'lodash/memoize'
 
 // squareMemoized(2) // вызовется
 // squareMemoized(3) // вызовется
@@ -9,7 +9,7 @@ import _memoize from 'lodash/memoize';
 
 
 // ////////////////////////////////
-import _wrap from 'lodash/wrap'; // Вася is Cool guy, Musician
+import _wrap from 'lodash/wrap' // Вася is Cool guy, Musician
 
 // //////////////////////
 // import _property from 'lodash/property'
@@ -21,25 +21,25 @@ import _wrap from 'lodash/wrap'; // Вася is Cool guy, Musician
 // /
 
 // /
-import _ from 'lodash';
+import _ from 'lodash'
 
 const square = function (number) {
-  return number * number;
-};
+  return number * number
+}
 
-const squareMemoized = _memoize(square);
+const squareMemoized = _memoize(square)
 
 const describeMan = function (name, description, description2 = '') {
-  return `${name} is ${description}, ${description2}`;
-};
-const describeVasya = _wrap('Вася', describeMan);
+  return `${name} is ${description}, ${description2}`
+}
+const describeVasya = _wrap('Вася', describeMan)
 
-describeVasya('Cool guy'); // Вася is Cool guy,
-describeVasya('Cool guy', 'Musician');
+describeVasya('Cool guy') // Вася is Cool guy,
+describeVasya('Cool guy', 'Musician')
 
 
 function save(obj) {
-  console.log('saving', obj.name);
+  console.log('saving', obj.name)
 }
 
 const saveDebounced = _.wrap(
@@ -50,19 +50,19 @@ const saveDebounced = _.wrap(
     _.property('id'),
   ),
   (func, obj) => func(obj)(obj),
-);
+)
 
 // function sleep(ms) {ms += new Date().getTime();while (new Date() < ms){}}
 
 // saveDebounced({ id: 1, name: 'Jim' });
 // saveDebounced({ id: 2, name: 'Jane' });
 // saveDebounced({ id: 1, name: 'James' });
-const i = 0;
-const { body } = document;
+const i = 0
+const { body } = document
 body.addEventListener('click', () => {
-  console.log('======clicked');
-  saveDebounced({ id: 1, name: `James ${i}` });
-});
+  console.log('======clicked')
+  saveDebounced({ id: 1, name: `James ${i}` })
+})
 // setInterval(()=>{
 //   i += 1
 //   console.log(`here----------------------------------${i}`)
@@ -94,22 +94,22 @@ body.addEventListener('click', () => {
  */
 const debounceByKey = function (cacheKey, func) {
   // return _.debounce(func, 150)
-  return func;
+  return func
   // console.dir(func)
   // return func.bind(this, {id:3, name:'lars'})
   // return _.wrap()
-};
+}
 
 const doSomethingWithObject = function (object) {
-  console.log(object); console.log('^...object:');
-};
+  console.log(object); console.log('^...object:')
+}
 
-const object1 = { id: 1, name: 'James' };
-const object2 = { id: 2, name: 'Kirk' };
+const object1 = { id: 1, name: 'James' }
+const object2 = { id: 2, name: 'Kirk' }
 
 
 // doSomethingWithObject(object1)
 
-const doSomethingWithObjectDebounced = debounceByKey(object1.id, doSomethingWithObject);
+const doSomethingWithObjectDebounced = debounceByKey(object1.id, doSomethingWithObject)
 // let doSomethingWithObjectDebounced = debounceByKey(doSomethingWithObject)
 // doSomethingWithObjectDebounced(object1.id, object1)

@@ -19,7 +19,7 @@
 
 <script>
 
-import Asset from '@/orm/Asset';
+import Asset from '@/orm/Asset'
 
 export default {
   props: {
@@ -31,21 +31,21 @@ export default {
   data() {
     return {
       tempCode: 'USDC',
-    };
+    }
   },
   computed: {
     imgUrl() {
-      const codeLC = this.asset.symbol.toLowerCase();
-      return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`;
+      const codeLC = this.asset.symbol.toLowerCase()
+      return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`
     },
 
   },
   methods: {
     fakeImgUrl(event) {
-      event.target.src = 'https://coincap.io/static/logo_mark.png';
+      event.target.src = 'https://coincap.io/static/logo_mark.png'
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

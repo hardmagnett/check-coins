@@ -1,4 +1,4 @@
-import { Model } from '@vuex-orm/core';
+import { Model } from '@vuex-orm/core'
 
 export default class Exchange extends Model {
   static entity = 'exchanges'
@@ -11,6 +11,6 @@ export default class Exchange extends Model {
       exchangeId: this.string(''),
       name: this.string(''),
       socket: this.boolean(false),
-    };
+    }
   }
 }

@@ -13,13 +13,13 @@
   </div>
 </template>
 <script>
-import CoinTable from '@/components/CoinTable.vue';
-import Container from '@/components/Container.vue';
-import ContainerVertical from '@/components/ContainerVertical.vue';
+import CoinTable from '@/components/CoinTable.vue'
+import Container from '@/components/Container.vue'
+import ContainerVertical from '@/components/ContainerVertical.vue'
 
 export default {
   components: { CoinTable, Container, ContainerVertical },
-};
+}
 
 
 </script>

@@ -30,10 +30,10 @@
 
 <script>
 
-import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas';
-import CoinDetails from '@/components/CoinDetails';
+import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas'
+import CoinDetails from '@/components/CoinDetails'
 
-import Asset from '@/orm/Asset';
+import Asset from '@/orm/Asset'
 
 
 export default {
@@ -49,22 +49,22 @@ export default {
   watch: {
     'asset.priceUsdHumanVisible': function (newVal, oldVal) {
       if (newVal > oldVal) {
-        this.$refs.carcaas.highlightPriceIncrease();
+        this.$refs.carcaas.highlightPriceIncrease()
       } else {
-        this.$refs.carcaas.highlightPriceDecrease();
+        this.$refs.carcaas.highlightPriceDecrease()
       }
     },
     'asset.tradesCounter': function (newVal, oldVal) {
-      this.$refs.carcaas.highlightNewTrade();
+      this.$refs.carcaas.highlightNewTrade()
     },
   },
   async beforeDestroy() {
-    await Asset.dispatch('removeVisibleAssetIdForTable', { assetId: this.asset.id });
+    await Asset.dispatch('removeVisibleAssetIdForTable', { assetId: this.asset.id })
   },
   async mounted() {
-    await Asset.dispatch('addVisibleAssetIdForTable', { assetId: this.asset.id });
+    await Asset.dispatch('addVisibleAssetIdForTable', { assetId: this.asset.id })
   },
-};
+}
 </script>
 
 <style scoped lang="scss">

@@ -27,36 +27,36 @@
 
 <script>
 
-import VirtualList from 'vue-virtual-scroll-list';
+import VirtualList from 'vue-virtual-scroll-list'
 
-import CoinTableHead from '@/components/CoinTableHead';
-import CoinTableLine from '@/components/CoinTableLine';
+import CoinTableHead from '@/components/CoinTableHead'
+import CoinTableLine from '@/components/CoinTableLine'
 
-import Asset from '@/orm/Asset';
-import Exchange from '@/orm/Exchange';
+import Asset from '@/orm/Asset'
+import Exchange from '@/orm/Exchange'
 
 
 export default {
   components: { CoinTableHead, CoinTableLine, VirtualList },
   computed: {
     assets() {
-      return Asset.getters('getAssetsPagination');
+      return Asset.getters('getAssetsPagination')
     },
   },
   async mounted() {
-    await Exchange.dispatch('fetch');
+    await Exchange.dispatch('fetch')
   },
   methods: {
     async infiniteHandler($state) {
-      const response = await Asset.dispatch('fetchForPaginationTable', { foo: 'bar' });
+      const response = await Asset.dispatch('fetchForPaginationTable', { foo: 'bar' })
       if (response.data.data.length) {
-        $state.loaded();	// значит можно загружать ещё
+        $state.loaded()	// значит можно загружать ещё
       } else {
-        $state.complete();	// значит больше загружать нельзя
+        $state.complete()	// значит больше загружать нельзя
       }
     },
   },
-};
+}
 </script>
 
 <style scoped lang="scss">
