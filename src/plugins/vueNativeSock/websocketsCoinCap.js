@@ -1,3 +1,5 @@
+// todo: Это вроде щас нигде не юзается и ваще нужно удалить
+
 import Vue from 'vue'
 import VueNativeSock from 'vue-native-websocket'
 import store from '@/store'

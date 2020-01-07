@@ -10,7 +10,7 @@ import '@/plugins/index.js'
 
 Vue.config.productionTip = false
 
-
+// todo: Вынеcти отсюда
 function createPassToStoreHandler(eventsSettings = {}) {
   return function (currEventName, event) {
     if (!currEventName.startsWith('SOCKET_')) return
@@ -28,45 +28,31 @@ function createPassToStoreHandler(eventsSettings = {}) {
     if (eventsSettings[currEventName]) {
       eventSettings = { ...eventSettings, ...eventsSettings[currEventName] }
     }
+
     eventSettings.methodName = 'SOCKET_' + eventSettings.methodName
     const methodNameFull = eventSettings.namespace + eventSettings.methodName
-    console.log(methodNameFull); console.log('^...methodNameFull:')
     this.store[eventSettings.methodType](methodNameFull, msg)
   }
 }
 
-let passToStoreHandler = createPassToStoreHandler({
-  onmessage: {
-    namespace: 'entities/assets/',
-    methodType: 'dispatch',
-    methodName: 'ON_PRICE_CHANGE',
-  },
-})
-Vue.use(VueNativeSock, 'wss://ws.coincap.io/prices?assets=ALL', {
-  store,
-  format: 'json',
-  reconnection: true,
-  // connectManually: true,
-  passToStoreHandler,
-  passToStoreHandlerZ(eventName, event) {
-    if (!eventName.startsWith('SOCKET_')) { return }
-    const msg = event.data ? JSON.parse(event.data) : {}
+function createOptions(options = {}, eventsSettings = {}) {
+  options = {
+    ...options,
+    store,
+    format: 'json',
+    reconnection: true,
+  }
+  let result =  {
+    ...options,
+    passToStoreHandler: createPassToStoreHandler(eventsSettings),
+  }
+  return result
+}
 
-    let myVuexMethodType = 'commit' // по умолчанию вызывается мутация
-    let myVuexNamespace = '' // по умолчанию корневой модуль
-    let myVuexMethodName = eventName.toUpperCase()
+// todo: Вынеcти досюда
 
-    if (
-      eventName === 'SOCKET_onmessage'
-    ) {
-      myVuexMethodType = 'dispatch' // вызывает экшн
-      myVuexNamespace = 'entities/assets/'
-      myVuexMethodName = 'SOCKET_ON_PRICE_CHANGE'
-    }
-    const myVuexMethodNameFull = myVuexNamespace + myVuexMethodName
-    // console.log(this)
-    this.store[myVuexMethodType](myVuexMethodNameFull, msg)
-  },
+Vue.use(VueNativeSock, 'wss://ws.coincap.io', {
+  connectManually: true,
 })
 
 const vm = new Vue({
@@ -75,10 +61,14 @@ const vm = new Vue({
   render: (h) => h(App),
 }).$mount('#app')
 
-// todo: вызывать это после получения списка ассетов
-//  Но только после того как напишешь ф-ю реконнекта
-// websocketsCoinCap.connectToPrices()
-
-// export { vm }
-
+vm.$connect(
+  'wss://ws.coincap.io/prices?assets=ALL',
+  createOptions({}, {
+    onmessage: {
+      namespace: 'entities/assets/',
+      methodType: 'dispatch',
+      methodName: 'ON_PRICE_CHANGE',
+    },
+  }),
+)
 
