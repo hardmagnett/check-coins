@@ -21,6 +21,7 @@ module.exports = {
     'no-tabs': 'warn',
     'prefer-const': 'warn',
     'no-trailing-spaces': 'warn',
+    'no-multiple-empty-lines': 'warn',
     'space-infix-ops': 'warn',
     'semi': ['warn', 'never'],
     'no-restricted-syntax': 'off',
