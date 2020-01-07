@@ -33,7 +33,7 @@ const vuexModuleHelpers = {
   },
 }
 
-
+let tempCounter = 1;
 export default {
   state: {
 
@@ -66,8 +66,9 @@ export default {
     // 2 - сделать максимальную частоту обновления раз в 3 секунды
     SOCKET_ON_PRICE_CHANGE({ commit }, newPrices) {
       for (const coinId in newPrices) {
-        // console.log(coinId)
+        // console.log('coinId')
         // if (coinId !== 'bitcoin') continue
+        // if (coinId === 'ethereum') console.log('ethereum')
 
         const coinNewPrice = newPrices[coinId]
         // commit('updateOrPreCachePriceUsd', { coinId, coinNewPrice })
@@ -170,6 +171,8 @@ export default {
     },
 
     updateVolumeChangeCounter(state, { coinId }) {
+      // console.log(tempCounter+=1)
+
       // Если обьем продаж не выводится на данном разрешении экрана то и не показывать операцию вовсе.
       // Вообще нехорошо в vuex делать что-либо касательно view-рендеринга,
       // но учитывая что рендеринг довольно тяжелый - здесь - самое оптимальное место для этой проверки.
