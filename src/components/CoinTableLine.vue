@@ -40,25 +40,27 @@ export default {
   },
   watch: {
     'asset.priceUsdHumanVisible': function (newVal, oldVal) {
-      // newVal > oldVal
-      //   ? this.$refs.carcaas.highlightPriceIncrease()
-      //   : this.$refs.carcaas.highlightPriceDecrease()
+      // todo: нужен механизм защиты от подсветки
+      //  на случай если компонент только-что подмотнировался
+      //  и получил обновления из пре-кеша
 
-      if (newVal > oldVal) {
-        this.$refs.carcaas.highlightPriceIncrease()
-      } else {
-        this.$refs.carcaas.highlightPriceDecrease()
-      }
+      newVal > oldVal
+        ? this.$refs.carcaas.highlightPriceIncrease()
+        : this.$refs.carcaas.highlightPriceDecrease()
+
     },
     'asset.tradesCounter': function () {
       this.$refs.carcaas.highlightNewTrade()
     },
   },
-  async beforeDestroy() {
-    await Asset.dispatch('removeVisibleAssetIdForTable', { assetId: this.asset.id })
+  async beforeMount() {
+    await Asset.dispatch('updatePriceUsdFromPreCache', { assetId: this.asset.id })
   },
   async mounted() {
     await Asset.dispatch('addVisibleAssetIdForTable', { assetId: this.asset.id })
+  },
+  async beforeDestroy() {
+    await Asset.dispatch('removeVisibleAssetIdForTable', { assetId: this.asset.id })
   },
 }
 </script>

@@ -36,6 +36,10 @@ const vuexModuleHelpers = {
 
 export default {
   state: {
+
+    // todo: вынести все кеши наружу от state
+    //  чтобы система реактивности vue ничего о них не знала
+    //  это снизит нагрузку.
     assetsPaginationIds: [],
 
     /**
@@ -62,14 +66,12 @@ export default {
     // 2 - сделать максимальную частоту обновления раз в 3 секунды
     SOCKET_ON_PRICE_CHANGE({ commit }, newPrices) {
       for (const coinId in newPrices) {
-        console.log(coinId)
-        if (coinId !== 'bitcoin') continue
+        // console.log(coinId)
+        // if (coinId !== 'bitcoin') continue
 
         const coinNewPrice = newPrices[coinId]
-        commit('updatePriceUsd', {
-          id: coinId,
-          priceUsd: coinNewPrice,
-        })
+        // commit('updateOrPreCachePriceUsd', { coinId, coinNewPrice })
+        Asset.dispatch('updateOrPreCachePriceUsd', { coinId, coinNewPrice })
       }
     },
 
@@ -116,6 +118,43 @@ export default {
 
       return response
     },
+    updatePriceUsd(state, { assetId, assetNewPrice }) {
+      Asset.update({
+        data: {
+          id: assetId,
+          priceUsd: assetNewPrice,
+        },
+      })
+    },
+    updatePriceUsdFromPreCache({ state }, { assetId }) {
+      // console.log(state); console.log('^...state:')
+
+      let assetFromPreCache = state.notYetUpdatedPrices[assetId]
+      if (!assetFromPreCache) return
+
+      const assetNewPrice = assetFromPreCache.notUpdatedPrice
+      assetFromPreCache = undefined
+
+      Asset.dispatch('updatePriceUsd', { assetId, assetNewPrice })
+    },
+    updateOrPreCachePriceUsd({ state }, { coinId, coinNewPrice }) {
+      const isCoinVisibleNow = state.visibleAssetIdsForTable.includes(coinId)
+
+      if (isCoinVisibleNow) {
+        // todo: здесь должна вызыватся ф-я
+        //  которая условно либо вызовет ф-ю для реального обновления
+        //  должна называться updatePriceUsdDebounced
+        //  либо закеширует
+        Asset.dispatch('updatePriceUsd', {
+          assetId: coinId,
+          assetNewPrice: coinNewPrice,
+        })
+      } else {
+        state.notYetUpdatedPrices[coinId] = {
+          notUpdatedPrice: coinNewPrice,
+        }
+      }
+    },
   },
   getters: {
     getAssetsPagination(state) {
@@ -130,23 +169,6 @@ export default {
       state.assetsPaginationIds = [...state.assetsPaginationIds, ...newIds]
     },
 
-    updatePriceUsd(state, { coinId, coinNewPrice }) {
-      const isCoinVisibleNow = state.visibleAssetIdsForTable.includes(coinId)
-
-      if (isCoinVisibleNow) {
-        Asset.update({
-          data: {
-            id: coinId,
-            priceUsd: coinNewPrice,
-          },
-        })
-      } else {
-        // записать новое значение в переменную
-        // notYetUpdatedPrices
-      }
-
-
-    },
     updateVolumeChangeCounter(state, { coinId }) {
       // Если обьем продаж не выводится на данном разрешении экрана то и не показывать операцию вовсе.
       // Вообще нехорошо в vuex делать что-либо касательно view-рендеринга,
