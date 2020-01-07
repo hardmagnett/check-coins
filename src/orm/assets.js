@@ -9,10 +9,14 @@ import coinApi from '@/plugins/axios/coinApi'
 
 import Asset from '@/orm/Asset'
 
+// Находятся здесь, потому что из мутаций нельзя вызывать другие мутации. Зато можно вызывать хелперы.
 const vuexModuleHelpers = {
 
+  // todo - отрефакторить. Есть дубли кода.
   canUpdateVolumeChangeCounterByInterval(state, coinId) {
+    // интервал в мс, чаще которого не показывать новые сделки
     const msForCoin = 5000
+
     const now = Date.now()
     let result = false
     if (!state.assetVolumeChangeCounerUpdages[coinId]) {
