@@ -1,4 +1,5 @@
 import coinApi from '@/plugins/axios/coinApi'
+// import websocketsCoinCap from '@/plugins/vueNativeSock/websocketsCoinCap.js'
 
 import Asset from '@/orm/Asset'
 import store from '@/store'
@@ -21,29 +22,32 @@ export default {
         for (const exchange of insertedData.exchanges) {
           if (!exchange.socket) continue
           // console.log(exchange); console.log('^...exchange:')
-          this._vm.$connect(`wss://ws.coincap.io/trades/${exchange.exchangeId}`, {
-            store,
-            format: 'json',
-            reconnection: true,
-            passToStoreHandler(eventName, event) {
-              if (!eventName.startsWith('SOCKET_')) { return }
-              const msg = event.data ? JSON.parse(event.data) : {}
 
-              let myVuexMethodType = 'commit' // по умолчанию вызывается мутация
-              let myVuexNamespace = '' // по умолчанию корневой модуль
-              let myVuexMethodName = eventName.toUpperCase()
+          // websocketsCoinCap.connectToExchange(exchange.exchangeId)
 
-              if (
-                eventName === 'SOCKET_onmessage'
-              ) {
-                myVuexMethodType = 'dispatch' // вызывает экшн
-                myVuexNamespace = 'entities/assets/'
-                myVuexMethodName = 'SOCKET_ON_VOLUME_CHANGE'
-              }
-              const myVuexMethodNameFull = myVuexNamespace + myVuexMethodName
-              this.store[myVuexMethodType](myVuexMethodNameFull, msg)
-            },
-          })
+          // this._vm.$connect(`wss://ws.coincap.io/trades/${exchange.exchangeId}`, {
+          //   store,
+          //   format: 'json',
+          //   reconnection: true,
+          //   passToStoreHandler(eventName, event) {
+          //     if (!eventName.startsWith('SOCKET_')) { return }
+          //     const msg = event.data ? JSON.parse(event.data) : {}
+          //
+          //     let myVuexMethodType = 'commit' // по умолчанию вызывается мутация
+          //     let myVuexNamespace = '' // по умолчанию корневой модуль
+          //     let myVuexMethodName = eventName.toUpperCase()
+          //
+          //     if (
+          //       eventName === 'SOCKET_onmessage'
+          //     ) {
+          //       myVuexMethodType = 'dispatch' // вызывает экшн
+          //       myVuexNamespace = 'entities/assets/'
+          //       myVuexMethodName = 'SOCKET_ON_VOLUME_CHANGE'
+          //     }
+          //     const myVuexMethodNameFull = myVuexNamespace + myVuexMethodName
+          //     this.store[myVuexMethodType](myVuexMethodNameFull, msg)
+          //   },
+          // })
         }
       }
     },

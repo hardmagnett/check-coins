@@ -1,12 +1,10 @@
 import 'normalize.css'
 import Vue from 'vue'
-import VueNativeSock from 'vue-native-websocket'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import '@/plugins/index.js'
-import websockets from '@/plugins/vueNativeSock.js'
-
+import websocketsCoinCap from '@/plugins/vueNativeSock/websocketsCoinCap.js'
 
 Vue.config.productionTip = false
 
@@ -18,6 +16,6 @@ const vm = new Vue({
 
 // todo: вызывать это после получения списка ассетов
 //  Но только после того как напишешь ф-ю реконнекта
-websockets.connectToPrices()
+websocketsCoinCap.connectToPrices()
 
 export { vm }
