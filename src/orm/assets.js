@@ -11,6 +11,16 @@ let unreactive = {
    * Пример содержания:  {'bitcoin': {lastUpdateTS: timestamp}}
    */
   assetVolumeChangeUpdateCounter: {},
+
+  /**
+   * Кеш
+   * Данные записываются сюда
+   * когда пришла новая цена, но валюта не выведена в таблице (например непроскроллено).
+   * Данные удаляются отсюда
+   * когда валюта становится видимой в таблице (например пользователь доскроллил до валюты)
+   * Пример содержания: {'bitcoin': {notUpdatedPrice: Number}}
+   */
+  notYetUpdatedPrices: {},
 }
 
 const vuexModuleHelpers = {
@@ -45,17 +55,6 @@ export default {
     //  чтобы система реактивности vue ничего о них не знала
     //  это снизит нагрузку.
 
-
-    /**
-     * Кеш
-     * Данные записываются сюда
-     * когда пришла новая цена, но валюта не выведена в таблице (например непроскроллено).
-     * Данные удаляются отсюда
-     * когда валюта становится видимой в таблице (например пользователь доскроллил до валюты)
-     * Пример содержания: {'bitcoin': {notUpdatedPrice: Number}}
-     */
-    notYetUpdatedPrices: {},
-
     /**
      * Кеш
      * Пример содержания: ['bitcoin']
@@ -69,22 +68,14 @@ export default {
   },
 
   actions: {
-    // todo
-    // 2 - сделать максимальную частоту обновления раз в 3 секунды
     SOCKET_ON_PRICE_CHANGE({ commit }, newPrices) {
       for (const coinId in newPrices) {
-        // console.log('coinId')
-        // if (coinId !== 'bitcoin') continue
-        // if (coinId === 'ethereum') console.log('ethereum')
-
         const coinNewPrice = newPrices[coinId]
-        // commit('updateOrPreCachePriceUsd', { coinId, coinNewPrice })
         Asset.dispatch('updateOrPreCachePriceUsd', { coinId, coinNewPrice })
       }
     },
 
     SOCKET_ON_VOLUME_CHANGE({ commit }, message) {
-      // return
       commit('updateVolumeChangeCounter', { coinId: message.base })
       commit('updateVolumeChangeCounter', { coinId: message.quote })
     },
@@ -135,9 +126,8 @@ export default {
       })
     },
     updatePriceUsdFromPreCache({ state }, { assetId }) {
-      // console.log(state); console.log('^...state:')
 
-      let assetFromPreCache = state.notYetUpdatedPrices[assetId]
+      let assetFromPreCache = unreactive.notYetUpdatedPrices[assetId]
       if (!assetFromPreCache) return
 
       const assetNewPrice = assetFromPreCache.notUpdatedPrice
@@ -158,7 +148,7 @@ export default {
           assetNewPrice: coinNewPrice,
         })
       } else {
-        state.notYetUpdatedPrices[coinId] = {
+        unreactive.notYetUpdatedPrices[coinId] = {
           notUpdatedPrice: coinNewPrice,
         }
       }
