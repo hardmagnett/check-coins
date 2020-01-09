@@ -27,6 +27,7 @@ import CoinDetails from '@/components/CoinDetails'
 
 import Asset from '@/orm/Asset'
 
+const msToNotBlinkAfterMount = 100
 
 export default {
   components: {
@@ -38,11 +39,18 @@ export default {
       required: true,
     },
   },
+  data() {
+    return {
+      // нужен чтобы не подсвечивать изменение курса при монтировании, если данные взяты из кеша.
+      // Без этого при монтировании некскольких валют, все они одновременно подсвечиваются.
+      beforeMountTimestamp: null, // Number|null
+    }
+  },
   watch: {
     'asset.priceUsdHumanVisible': function (newVal, oldVal) {
-      // todo: нужен механизм защиты от подсветки
-      //  на случай если компонент только-что подмотнировался
-      //  и получил обновления из пре-кеша
+
+      // Если компонент подмонтирован только-что, то не подсвечивать изменения
+      if (Date.now() < this.beforeMountTimestamp + msToNotBlinkAfterMount) return
 
       newVal > oldVal
         ? this.$refs.carcaas.highlightPriceIncrease()
@@ -54,6 +62,7 @@ export default {
     },
   },
   async beforeMount() {
+    this.beforeMountTimestamp = Date.now()
     await Asset.dispatch('updatePriceUsdFromPreCache', { assetId: this.asset.id })
   },
   async mounted() {
