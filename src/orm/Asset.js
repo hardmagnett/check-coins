@@ -1,8 +1,8 @@
 import { Model } from '@vuex-orm/core'
-import numberFormatters from '@/helpers/number/formatters'
 
 import _round from 'lodash/round'
 import numbro from 'numbro'
+import numberFormatters from '@/helpers/number/formatters'
 
 
 /**
@@ -12,7 +12,7 @@ import numbro from 'numbro'
 export default class Asset extends Model {
   static entity = 'assets'
 
-  static fields () {
+  static fields() {
     return {
       // например `bitcoin`
       id: this.string(''),
@@ -28,7 +28,7 @@ export default class Asset extends Model {
       volumeUsd24Hr: this.number(0),
 
       // синтетическое поле чтобы подсвечивать появление новой операции
-      tradesCounter: this.number(0)
+      tradesCounter: this.number(0),
     }
   }
 
@@ -37,10 +37,10 @@ export default class Asset extends Model {
    * При его изменении клетка в таблице подсвечивается зеленым или красным в зависимости от уменьшения или увеличения
    * @returns {number}
    */
-  get priceUsdHumanVisible(){
-    let maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
+  get priceUsdHumanVisible() {
+    const maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
     // let result = this.priceUsd
-    let result = _round(this.priceUsd, maximumFractionDigits)
+    const result = _round(this.priceUsd, maximumFractionDigits)
     return result
   }
 
@@ -48,30 +48,30 @@ export default class Asset extends Model {
    * Форматированная строка, которую реально видит пользователь.
    * @returns {*|string}
    */
-  get priceUsdHumanReadable () {
-    let maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
+  get priceUsdHumanReadable() {
+    const maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
     let result = numbro(this.priceUsdHumanVisible).format({
       thousandSeparated: true,
       mantissa: maximumFractionDigits,
-    });
+    })
     result = numberFormatters.withCurrencySign(result)
     return result
   }
 
-  get volumeUsd24HrHumanReadable () {
-    if (this.volumeUsd24Hr === 0 ) return '-'
+  get volumeUsd24HrHumanReadable() {
+    if (this.volumeUsd24Hr === 0) return '-'
     let result = numberFormatters.withSuffix(this.volumeUsd24Hr)
     result = numberFormatters.withCurrencySign(result)
     return result
   }
 
-  get marketCapUsdHumanReadable () {
-    if (this.marketCapUsd === 0 ) return '-'
+  get marketCapUsdHumanReadable() {
+    if (this.marketCapUsd === 0) return '-'
     let result = numbro(this.marketCapUsd).format({
       average: true,
       thousandSeparated: true,
       mantissa: 2,
-    });
+    })
     result = numberFormatters.withCurrencySign(result)
     return result
   }

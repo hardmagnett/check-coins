@@ -4,24 +4,24 @@ export default {
    * @param number
    * @returns {string}
    */
-  withSuffix(number){
+  withSuffix(number) {
     let suffix = ''
     let result = number
     const billion = 1000000000
     const million = 1000000
     const thousand = 1000
     if (result >= billion) {
-      result = result / billion
+      result /= billion
       suffix = 'b'
     } else if (result >= million) {
-      result = result / million
+      result /= million
       suffix = 'm'
     } else if (result >= thousand) {
-      result = result / thousand
+      result /= thousand
       suffix = 'k'
     }
 
-    let maximumFractionDigits = this.getFractionByNumber(number)
+    const maximumFractionDigits = this.getFractionByNumber(number)
     result = this.withPunctuation(result, maximumFractionDigits)
     result = `${result}${suffix}`
 
@@ -32,7 +32,7 @@ export default {
    * @param string
    * @returns {string}
    */
-  withCurrencySign(string){
+  withCurrencySign(string) {
     return `$ ${string}`
   },
 
@@ -42,7 +42,7 @@ export default {
    * @param number
    * @returns {number}
    */
-  getFractionByNumber(number){
+  getFractionByNumber(number) {
     return number > 1 ? 2 : 8
   },
   /**
@@ -51,11 +51,11 @@ export default {
    * @param fractionQty
    * @returns {string}
    */
-  withPunctuation(number, fractionQty){
-    let result = number.toLocaleString(
+  withPunctuation(number, fractionQty) {
+    const result = number.toLocaleString(
       'en-GB',
-      {maximumFractionDigits: fractionQty}
+      { maximumFractionDigits: fractionQty },
     )
     return result
-  }
+  },
 }

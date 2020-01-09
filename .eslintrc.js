@@ -1,20 +1,47 @@
 module.exports = {
   root: true,
   env: {
-    node: true
+    browser: true,
+    es6: true,
+    node: true,
   },
-  'extends': [
-    'plugin:vue/essential',
-    'eslint:recommended'
+  extends: [
+    'airbnb-base',
+    'plugin:vue/recommended',
   ],
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    "no-unused-vars": "warn",
-    "no-constant-condition": "warn",
-    'vue/no-unused-vars': 'warn'
+    'no-unused-vars': 'warn',
+    'no-unreachable': 'warn',
+    'no-constant-condition': 'warn',
+    'no-empty': 'warn',
+    'no-shadow': 'warn',
+    'guard-for-in': 'warn',
+    'no-tabs': 'warn',
+    'indent': 'warn',
+    'prefer-const': 'warn',
+    'no-trailing-spaces': 'warn',
+    'no-multiple-empty-lines': 'warn',
+    'space-infix-ops': 'warn',
+    'import/order': 'warn',
+    'semi': ['warn', 'never'],
+    'max-len': 'warn',
+    'no-restricted-syntax': 'off',
+    'padded-blocks': 'off',
+    'no-unused-expressions': 'off',
+    'func-names': 'off',
+    'no-continue': 'off',
+    'no-underscore-dangle': 'off',
+    'no-param-reassign': 'off',
+    'no-multi-spaces': 'off',
+    'prefer-template': 'off',
+    'import/no-unresolved': 'off',
+    'import/extensions': 'off',
+    'import/prefer-default-export': 'off',
+    'vue/no-unused-vars': 'warn',
   },
   parserOptions: {
-    parser: 'babel-eslint'
-  }
+    parser: 'babel-eslint',
+  },
 }

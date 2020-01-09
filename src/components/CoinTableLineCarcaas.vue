@@ -1,42 +1,52 @@
 <template>
   <div class="coin-table-line-carcaas">
-    <div class="coin-table-line-carcaas__rank">
-      <slot name="rank"/>
+    <div
+      v-if="$screen.showInTableColumnRank"
+      class="coin-table-line-carcaas__rank"
+    >
+      <slot name="rank" />
     </div>
     <div class="coin-table-line-carcaas__name">
-      <slot name="name"/>
+      <slot name="name" />
     </div>
-    <div class="coin-table-line-carcaas__pusher"></div>
-    <div class="coin-table-line-carcaas__price"
-         :class="{
-          'mod--flash-success': isPriceJustIncreased,
-          'mod--flash-error': isPriceJustDecreased
-         }"
-         @animationend="finishFlashAnimation"
+    <div class="coin-table-line-carcaas__pusher" />
+    <div
+      class="coin-table-line-carcaas__price"
+      :class="{
+        'mod--flash-success': isPriceJustIncreased,
+        'mod--flash-error': isPriceJustDecreased
+      }"
+      @animationend="finishFlashAnimation"
     >
-      <slot name="price"/>
+      <slot name="price" />
     </div>
-    <div class="coin-table-line-carcaas__market-cap">
-      <slot name="market-cap"/>
+    <div
+      v-if="$screen.showInTableColumnMarketCap"
+      class="coin-table-line-carcaas__market-cap"
+    >
+      <slot name="market-cap" />
     </div>
-    <div class="coin-table-line-carcaas__volumeUsd24Hr"
-         :class="{
-          'mod--flash-success-trade': isNewDealJustFinished,
-         }"
-         @animationend="finishFlashAnimationTrade">
-      <slot name="volumeUsd24Hr"/>
+    <div
+      v-if="$screen.showInTableColumnVolume24Hr"
+      class="coin-table-line-carcaas__volumeUsd24Hr"
+      :class="{
+        'mod--flash-success-trade': isNewDealJustFinished,
+      }"
+      @animationend="finishFlashAnimationTrade"
+    >
+      <slot name="volumeUsd24Hr" />
     </div>
   </div>
 </template>
 
 <script>
-
+// todo: навести порядок с анимациями.
 export default {
-  data: function(){
+  data() {
     return {
       isPriceJustIncreased: false,
       isPriceJustDecreased: false,
-      isNewDealJustFinished: false
+      isNewDealJustFinished: false,
     }
   },
   methods: {
@@ -49,14 +59,14 @@ export default {
     highlightNewTrade() {
       this.isNewDealJustFinished = true
     },
-    finishFlashAnimation(){
+    finishFlashAnimation() {
       this.isPriceJustIncreased = false
       this.isPriceJustDecreased = false
     },
-    finishFlashAnimationTrade(){
+    finishFlashAnimationTrade() {
       this.isNewDealJustFinished = false
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -102,24 +112,6 @@ export default {
     flex: 0 0 130px;
     justify-content: flex-end;
   }
-  .coin-table-line-carcaas__rank,
-  .coin-table-line-carcaas__market-cap,
-  .coin-table-line-carcaas__volumeUsd24Hr
-  {
-    display: none;
-  }
-  @media (min-width: $bpSm) {
-    .coin-table-line-carcaas__rank {
-      display: flex;
-    }
-  }
-  @media (min-width: $bpSm2) {
-    .coin-table-line-carcaas__market-cap,
-    .coin-table-line-carcaas__volumeUsd24Hr {
-      display: flex;
-    }
-  }
-
 
   .mod--flash-success-trade {
     animation: flash-success 0.2s

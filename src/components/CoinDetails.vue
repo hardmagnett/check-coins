@@ -7,8 +7,12 @@
     >
 
     <div class="coin-details__texts">
-      <p class="coin-details__name">{{asset.name}}</p>
-      <p class="text text--small coin-details__code">{{asset.symbol}}</p>
+      <p class="coin-details__name">
+        {{ asset.name }}
+      </p>
+      <p class="text text--small coin-details__code">
+        {{ asset.symbol }}
+      </p>
     </div>
   </div>
 </template>
@@ -21,26 +25,26 @@ export default {
   props: {
     asset: {
       type: Asset,
-      required: true
-    }
+      required: true,
+    },
   },
-  data(){
-    return{
-      tempCode: 'USDC'
+  data() {
+    return {
+      tempCode: 'USDC',
     }
   },
   computed: {
-    imgUrl(){
-      let codeLC = this.asset.symbol.toLowerCase()
-      return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`;
+    imgUrl() {
+      const codeLC = this.asset.symbol.toLowerCase()
+      return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`
     },
 
   },
   methods: {
-    fakeImgUrl(event){
+    fakeImgUrl(event) {
       event.target.src = 'https://coincap.io/static/logo_mark.png'
-    }
-  }
+    },
+  },
 }
 </script>
 

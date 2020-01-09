@@ -3,24 +3,23 @@
     <container-vertical>
       <container
         class="container--fluid container--top-just-for-design"
-      >
-      </container>
+      />
       <container
         class="container--no-padding-on-xs container--for-table"
       >
-        <coin-table></coin-table>
+        <coin-table />
       </container>
     </container-vertical>
-
   </div>
 </template>
 <script>
-  import CoinTable from '@/components/CoinTable.vue'
-  import Container from '@/components/Container.vue'
-  import ContainerVertical from '@/components/ContainerVertical.vue'
-  export default {
-    components: {CoinTable, Container, ContainerVertical}
-  }
+import CoinTable from '@/components/CoinTable.vue'
+import Container from '@/components/Container.vue'
+import ContainerVertical from '@/components/ContainerVertical.vue'
+
+export default {
+  components: { CoinTable, Container, ContainerVertical },
+}
 
 
 </script>

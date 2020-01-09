@@ -27,8 +27,8 @@ import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas'
 
 export default {
   components: {
-    CoinTableLineCarcaas
-  }
+    CoinTableLineCarcaas,
+  },
 }
 </script>
 

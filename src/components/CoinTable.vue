@@ -1,10 +1,10 @@
 <template>
   <div class="coin-table">
-    <coin-table-head></coin-table-head>
+    <coin-table-head />
     <div class="coin-table__lines global-mod--with-cool-scrollbar">
       <virtual-list
         :size="69"
-        :remain="20"
+        :remain="15"
 
         style="max-height: 100%;"
         class="global-mod--with-cool-scrollbar"
@@ -13,51 +13,50 @@
           v-for="asset in assets"
           :key="asset.id"
           :asset="asset"
-        ></coin-table-line>
+        />
         <infinite-loading
+          :distance="1000"
           @infinite="infiniteHandler"
         >
-          <span slot="no-results"></span>
+          <span slot="no-results" />
         </infinite-loading>
       </virtual-list>
     </div>
-
   </div>
 </template>
 
 <script>
 
-  import VirtualList from 'vue-virtual-scroll-list'
+import VirtualList from 'vue-virtual-scroll-list'
 
-  import CoinTableHead from '@/components/CoinTableHead'
-  import CoinTableLine from '@/components/CoinTableLine'
+import CoinTableHead from '@/components/CoinTableHead'
+import CoinTableLine from '@/components/CoinTableLine'
 
-  import Asset from '@/orm/Asset'
-  import Exchange from '@/orm/Exchange'
+import Asset from '@/orm/Asset'
+import Exchange from '@/orm/Exchange'
 
 
-
-  export default {
-    components: {CoinTableHead, CoinTableLine, VirtualList},
-    computed: {
-      assets(){
-        return Asset.getters('getAssetsPagination')
+export default {
+  components: { CoinTableHead, CoinTableLine, VirtualList },
+  computed: {
+    assets() {
+      return Asset.getters('getAssetsPagination')
+    },
+  },
+  async mounted() {
+    await Exchange.dispatch('fetch')
+  },
+  methods: {
+    async infiniteHandler($state) {
+      const response = await Asset.dispatch('fetchForPaginationTable', { foo: 'bar' })
+      if (response.data.data.length) {
+        $state.loaded()	// значит можно загружать ещё
+      } else {
+        $state.complete()	// значит больше загружать нельзя
       }
     },
-    methods: {
-      async infiniteHandler($state) {
-        let response = await Asset.dispatch('fetchForPaginationTable' , {foo: 'bar'})
-        if (response.data.data.length) {
-          $state.loaded();	// значит можно загружать ещё
-        } else {
-          $state.complete();	// значит больше загружать нельзя
-        }
-      },
-    },
-    async mounted(){
-      await Exchange.dispatch('fetch')
-    }
-  }
+  },
+}
 </script>
 
 <style scoped lang="scss">
