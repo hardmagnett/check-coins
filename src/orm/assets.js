@@ -1,32 +1,29 @@
 import coinApi from '@/plugins/axios/coinApi'
 import Asset from '@/orm/Asset'
 
-// Находятся здесь, потому что из мутаций нельзя вызывать другие мутации. Зато можно вызывать хелперы.
-// todo: может всё-таки вынести?
+// интервал в мс, чаще которого не показывать новые сделки
+const msForDeals = 5000
 const vuexModuleHelpers = {
 
-  // todo - отрефакторить. Есть дубли кода.
   canUpdateVolumeChangeCounterByInterval(state, coinId) {
-    // интервал в мс, чаще которого не показывать новые сделки
-    const msForCoin = 5000
 
     const now = Date.now()
-    let result = false
-    if (!state.assetVolumeChangeCounerUpdages[coinId]) {
-      state.assetVolumeChangeCounerUpdages[coinId] = {
-        lastUpdateTS: now,
-      }
-      result = true
-    } else if (
+
+    const wasUpdatedBefore = state.assetVolumeChangeCounerUpdages[coinId]
+
+    const wasUpdatedLongTimeAgo =
       state.assetVolumeChangeCounerUpdages[coinId]
-      && state.assetVolumeChangeCounerUpdages[coinId].lastUpdateTS + msForCoin < now
-    ) {
+      && state.assetVolumeChangeCounerUpdages[coinId].lastUpdateTS + msForDeals < now
+
+    const can = (!wasUpdatedBefore || wasUpdatedLongTimeAgo)
+
+    if (can) {
       state.assetVolumeChangeCounerUpdages[coinId] = {
         lastUpdateTS: now,
       }
-      result = true
     }
-    return result
+
+    return can
   },
 }
 
