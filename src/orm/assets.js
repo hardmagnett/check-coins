@@ -3,22 +3,32 @@ import Asset from '@/orm/Asset'
 
 // интервал в мс, чаще которого не показывать новые сделки
 const msForDeals = 5000
+
+// todo: заполнить
+let unreactive = {
+  /**
+   * Кеш
+   * Пример содержания:  {'bitcoin': {lastUpdateTS: timestamp}}
+   */
+  assetVolumeChangeUpdateCounter: {},
+}
+
 const vuexModuleHelpers = {
 
   canUpdateVolumeChangeCounterByInterval(state, coinId) {
 
     const now = Date.now()
 
-    const wasUpdatedBefore = state.assetVolumeChangeCounerUpdages[coinId]
+    const wasUpdatedBefore = unreactive.assetVolumeChangeUpdateCounter[coinId]
 
     const wasUpdatedLongTimeAgo =
-      state.assetVolumeChangeCounerUpdages[coinId]
-      && state.assetVolumeChangeCounerUpdages[coinId].lastUpdateTS + msForDeals < now
+      unreactive.assetVolumeChangeUpdateCounter[coinId]
+      && unreactive.assetVolumeChangeUpdateCounter[coinId].lastUpdateTS + msForDeals < now
 
     const can = (!wasUpdatedBefore || wasUpdatedLongTimeAgo)
 
     if (can) {
-      state.assetVolumeChangeCounerUpdages[coinId] = {
+      unreactive.assetVolumeChangeUpdateCounter[coinId] = {
         lastUpdateTS: now,
       }
     }
@@ -27,21 +37,14 @@ const vuexModuleHelpers = {
   },
 }
 
-// todo: заполнить
-let unreactive = {
 
-}
 export default {
   state: {
 
     // todo: вынести все кеши наружу от state
     //  чтобы система реактивности vue ничего о них не знала
     //  это снизит нагрузку.
-    /**
-     * Кеш
-     * Пример содержания:  {'bitcoin': {lastUpdateTS: timestamp}}
-     */
-    assetVolumeChangeCounerUpdages: {},
+
 
     /**
      * Кеш
