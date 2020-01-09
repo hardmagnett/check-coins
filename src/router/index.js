@@ -3,7 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
-
+// Роутинг в этой кодовой базе не используется. Файл оставлен на потом - позже пригодится.
 const routes = [
   {
     path: '/',

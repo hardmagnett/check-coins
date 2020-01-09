@@ -53,7 +53,6 @@ export default {
     .coin-table {
       overflow-y: hidden;
     }
-
   }
 }
 

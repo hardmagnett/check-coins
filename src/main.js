@@ -2,7 +2,6 @@ import 'normalize.css'
 import Vue from 'vue'
 import VueNativeSock from 'vue-native-websocket'
 import App from '@/App.vue'
-import router from '@/router'
 import store from '@/store'
 import '@/plugins/index.js'
 import createOptions from '@/plugins/vueNativeSock/websocketsCoinCap.js'
@@ -15,7 +14,6 @@ Vue.use(VueNativeSock, 'wss://ws.coincap.io', {
 })
 
 const vm = new Vue({
-  router,
   store,
   render: (h) => h(App),
 }).$mount('#app')
