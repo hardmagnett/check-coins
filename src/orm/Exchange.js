@@ -6,8 +6,6 @@ export default class Exchange extends Model {
   static fields() {
     return {
       id: this.string(''),
-
-      // предполагаю что по этому значению нужно коннектиться к сокету
       exchangeId: this.string(''),
       name: this.string(''),
       socket: this.boolean(false),

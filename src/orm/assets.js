@@ -1,15 +1,8 @@
-import _, {
-  memoize as _memoize,
-  debounce as _debounce,
-  property as _property,
-  wrap as _wrap,
-} from 'lodash'
-import logger from 'vuex/dist/logger'
 import coinApi from '@/plugins/axios/coinApi'
-
 import Asset from '@/orm/Asset'
 
 // Находятся здесь, потому что из мутаций нельзя вызывать другие мутации. Зато можно вызывать хелперы.
+// todo: может всё-таки вынести?
 const vuexModuleHelpers = {
 
   // todo - отрефакторить. Есть дубли кода.
@@ -37,25 +30,24 @@ const vuexModuleHelpers = {
   },
 }
 
-let tempCounter = 1;
+// todo: заполнить
+let unreactive = {
+
+}
 export default {
   state: {
 
     // todo: вынести все кеши наружу от state
     //  чтобы система реактивности vue ничего о них не знала
     //  это снизит нагрузку.
-    assetsPaginationIds: [],
-
     /**
+     * Кеш
      * Пример содержания:  {'bitcoin': {lastUpdateTS: timestamp}}
      */
     assetVolumeChangeCounerUpdages: {},
-    /**
-     * Пример содержания: ['bitcoin']
-     */
-    visibleAssetIdsForTable: [],
 
     /**
+     * Кеш
      * Данные записываются сюда
      * когда пришла новая цена, но валюта не выведена в таблице (например непроскроллено).
      * Данные удаляются отсюда
@@ -63,6 +55,17 @@ export default {
      * Пример содержания: {'bitcoin': {notUpdatedPrice: Number}}
      */
     notYetUpdatedPrices: {},
+
+    /**
+     * Кеш
+     * Пример содержания: ['bitcoin']
+     */
+
+    visibleAssetIdsForTable: [],
+
+
+    assetsPaginationIds: [],
+
   },
 
   actions: {
@@ -175,11 +178,11 @@ export default {
     },
 
     updateVolumeChangeCounter(state, { coinId }) {
-      // console.log(tempCounter+=1)
 
-      // Если обьем продаж не выводится на данном разрешении экрана то и не показывать операцию вовсе.
+      // Если обьем продаж не выводится на данном разрешении экрана,
+      // то и не показывать операцию вовсе.
       // Вообще нехорошо в vuex делать что-либо касательно view-рендеринга,
-      // но учитывая что рендеринг довольно тяжелый - здесь - самое оптимальное место для этой проверки.
+      // но учитывая что тяжелый рендеринг, здесь - оптимальное место для этой проверки.
       if (!this._vm.$screen.showInTableColumnVolume24Hr) return
 
       // если монета не видна сейчас в таблице, то не нужно показывать операцию

@@ -6,7 +6,7 @@ export default {
   state: {},
 
   actions: {
-    async fetch({ state, commit, dispatch }) {
+    async fetch({ dispatch }) {
       const response = await coinApi.get('exchanges')
       const { data } = response.data
       if (data.length) {
@@ -14,7 +14,7 @@ export default {
           data,
         })
 
-        // от каждой биржи,для которой есть вебсокет, получать информацию о сделках
+        // от каждой биржи, для которой есть вебсокет, получать информацию о сделках
         for (const exchange of insertedData.exchanges) {
           if (!exchange.socket) continue
 
