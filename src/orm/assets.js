@@ -21,6 +21,13 @@ let unreactive = {
    * Пример содержания: {'bitcoin': {notUpdatedPrice: Number}}
    */
   notYetUpdatedPrices: {},
+
+  /**
+   * Кеш
+   * Пример содержания: ['bitcoin']
+   */
+
+  visibleAssetIdsForTable: [],
 }
 
 const vuexModuleHelpers = {
@@ -50,21 +57,7 @@ const vuexModuleHelpers = {
 
 export default {
   state: {
-
-    // todo: вынести все кеши наружу от state
-    //  чтобы система реактивности vue ничего о них не знала
-    //  это снизит нагрузку.
-
-    /**
-     * Кеш
-     * Пример содержания: ['bitcoin']
-     */
-
-    visibleAssetIdsForTable: [],
-
-
     assetsPaginationIds: [],
-
   },
 
   actions: {
@@ -86,7 +79,7 @@ export default {
      */
     addVisibleAssetIdForTable(state, { assetId }) {
       Asset.commit((state) => {
-        state.visibleAssetIdsForTable.push(assetId)
+        unreactive.visibleAssetIdsForTable.push(assetId)
       })
     },
     /**
@@ -96,7 +89,7 @@ export default {
      */
     removeVisibleAssetIdForTable(state, { assetId }) {
       Asset.commit((state) => {
-        state.visibleAssetIdsForTable = state.visibleAssetIdsForTable.filter((id) => id !== assetId)
+        unreactive.visibleAssetIdsForTable = unreactive.visibleAssetIdsForTable.filter((id) => id !== assetId)
       })
     },
     async fetchForPaginationTable({ state, commit, dispatch }) {
@@ -136,7 +129,7 @@ export default {
       Asset.dispatch('updatePriceUsd', { assetId, assetNewPrice })
     },
     updateOrPreCachePriceUsd({ state }, { coinId, coinNewPrice }) {
-      const isCoinVisibleNow = state.visibleAssetIdsForTable.includes(coinId)
+      const isCoinVisibleNow = unreactive.visibleAssetIdsForTable.includes(coinId)
 
       if (isCoinVisibleNow) {
         // todo: здесь должна вызыватся ф-я
@@ -176,7 +169,7 @@ export default {
       if (!this._vm.$screen.showInTableColumnVolume24Hr) return
 
       // если монета не видна сейчас в таблице, то не нужно показывать операцию
-      if (!state.visibleAssetIdsForTable.includes(coinId)) return
+      if (!unreactive.visibleAssetIdsForTable.includes(coinId)) return
 
       // если только уже была операция, то не показывать ещё одну операцию
       if (!vuexModuleHelpers.canUpdateVolumeChangeCounterByInterval(state, coinId)) return
