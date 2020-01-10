@@ -115,7 +115,7 @@ export default {
         },
       })
     },
-    updatePriceUsdFromPreCache({ state }, { assetId }) {
+    updatePriceUsdFromPreCache({}, { assetId }) {
 
       let assetFromPreCache = unreactive.notYetUpdatedPrices[assetId]
       if (!assetFromPreCache) return
@@ -125,7 +125,7 @@ export default {
 
       Asset.dispatch('updatePriceUsd', { assetId, assetNewPrice })
     },
-    updateOrPreCachePriceUsd({ state }, { coinId, coinNewPrice }) {
+    updateOrPreCachePriceUsd({}, { coinId, coinNewPrice }) {
       const isCoinVisibleNow = unreactive.visibleAssetIdsForTable.includes(coinId)
 
       if (isCoinVisibleNow) {
