@@ -27,3 +27,31 @@ body {
       background: $clrBgAccent;
   }
 }
+
+
+.global-mod--flash-success-default {
+  animation: flash-success-default $timeMedium;
+}
+@keyframes flash-success-default {
+  from {background-color: initial;}
+  50% {background-color: $clrHighlightDefault;}
+  to {background-color: initial;}
+}
+
+.global-mod--flash-success {
+  animation: flash-success $timeMedium;
+}
+@keyframes flash-success {
+  from {background-color: initial;}
+  50% {background-color: $clrHighlightSuccess;}
+  to {background-color: initial;}
+}
+
+.global-mod--flash-error {
+  animation: flash-error $timeMedium;
+}
+@keyframes flash-error {
+  from {background-color: initial;}
+  50% {background-color: $clrHighlightError;}
+  to {background-color: initial;}
+}

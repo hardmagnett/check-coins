@@ -13,8 +13,8 @@
     <div
       class="coin-table-line-carcaas__price"
       :class="{
-        'mod--flash-success': isPriceJustIncreased,
-        'mod--flash-error': isPriceJustDecreased
+        'global-mod--flash-success': isPriceJustIncreased,
+        'global-mod--flash-error': isPriceJustDecreased
       }"
       @animationend="finishFlashAnimation"
     >
@@ -30,7 +30,7 @@
       v-if="$screen.showInTableColumnVolume24Hr"
       class="coin-table-line-carcaas__volumeUsd24Hr"
       :class="{
-        'mod--flash-success-default': isNewDealJustFinished,
+        'global-mod--flash-success-default': isNewDealJustFinished,
       }"
       @animationend="finishFlashAnimationTrade"
     >
@@ -111,36 +111,6 @@ export default {
   .coin-table-line-carcaas__volumeUsd24Hr {
     flex: 0 0 130px;
     justify-content: flex-end;
-  }
-
-  .mod--flash-success-default {
-    animation: flash-success-default $timeMedium;
-  }
-
-  // Анимации подсветки.
-  // При необходимости их использовать где-то ещё
-  // из можно вынести в global.scss
-
-  @keyframes flash-success-default {
-    from {background-color: initial;}
-    50% {background-color: $clrHighlightDefault;}
-    to {background-color: initial;}
-  }
-  .mod--flash-success {
-    animation: flash-success $timeMedium;
-  }
-  @keyframes flash-success {
-    from {background-color: initial;}
-    50% {background-color: $clrHighlightSuccess;}
-    to {background-color: initial;}
-  }
-  .mod--flash-error {
-    animation: flash-error $timeMedium;
-  }
-  @keyframes flash-error {
-    from {background-color: initial;}
-    50% {background-color: $clrHighlightError;}
-    to {background-color: initial;}
   }
 }
 </style>
