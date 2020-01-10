@@ -61,6 +61,7 @@ export default {
   },
 
   actions: {
+    // Вызывается в среднем 100 раз в секунду.
     SOCKET_ON_PRICE_CHANGE({}, newPrices) {
       for (const coinId in newPrices) {
         const coinNewPrice = newPrices[coinId]
@@ -68,6 +69,7 @@ export default {
       }
     },
 
+    // Вызывается в среднем 250 раз в секунду.
     SOCKET_ON_VOLUME_CHANGE({ commit }, message) {
       commit('updateVolumeChangeCounter', { coinId: message.base })
       commit('updateVolumeChangeCounter', { coinId: message.quote })

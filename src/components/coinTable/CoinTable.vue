@@ -2,6 +2,7 @@
   <div class="coin-table">
     <coin-table-head />
     <div class="coin-table__lines global-mod--with-cool-scrollbar">
+      <!--Строк в таблице слишком много, поэтому используется virtual list-->
       <virtual-list
         :size="69"
         :remain="15"
