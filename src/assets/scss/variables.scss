@@ -11,12 +11,18 @@ $clrBgSmall: #FAFBFC;             // например для шапки в та�
 $clrBorderOnLightBg: #EDEEF0;     // на фоне белого
 $clrBorderOnDarkBg: #E3E4E8;      // на фоне стыка белого с серым
 
+$clrHighlightDefault: #cfe4fa;
+$clrHighlightSuccess: #d4facf;
+$clrHighlightError: #facfcb;
+
 
 $bpSm:  480px;
 $bpSm2: 768px;
 $bpMd:  960px;
 $bpLg:  1280px;
 $bpXl:  1600px;
+
+$timeMedium: 1000ms;
 
 $gap: 18px;
 $border-radius: 6px;

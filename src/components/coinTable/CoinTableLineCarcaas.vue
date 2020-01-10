@@ -74,17 +74,14 @@ export default {
 .coin-table-line-carcaas {
   display: flex;
   flex-flow: row nowrap;
-  /*align-items: center;*/
 
   align-items: stretch;
 
   > * {
     flex: 0 0 auto;
     padding: $gap / 2;
-    /*padding: 0;*/
     overflow: hidden;
     display: flex;
-    /*outline: 1px solid darkred;*/
     align-items: center;
   }
 
@@ -114,22 +111,27 @@ export default {
   }
 
   .mod--flash-success-trade {
-    animation: flash-success 0.2s
+    animation: flash-success-trade $timeMedium;
+  }
+  @keyframes flash-success-trade {
+    from {background-color: initial;}
+    50% {background-color: $clrHighlightDefault;}
+    to {background-color: initial;}
   }
   .mod--flash-success {
-    animation: flash-success 1s
+    animation: flash-success $timeMedium;
   }
   @keyframes flash-success {
     from {background-color: initial;}
-    50% {background-color: #d4facf;}
+    50% {background-color: $clrHighlightSuccess;}
     to {background-color: initial;}
   }
   .mod--flash-error {
-    animation: flash-error 1s
+    animation: flash-error $timeMedium;
   }
   @keyframes flash-error {
     from {background-color: initial;}
-    50% {background-color: #facfcb;}
+    50% {background-color: $clrHighlightError;}
     to {background-color: initial;}
   }
 }
