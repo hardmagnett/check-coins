@@ -31,21 +31,10 @@ export default {
       required: true,
     },
   },
-  data() {
-    return {
-      tempCode: 'USDC',
-    }
-  },
   computed: {
     imgUrl() {
       const codeLC = this.asset.symbol.toLowerCase()
       return `https://static.coincap.io/assets/icons/${codeLC}@2x.png`
-    },
-
-  },
-  methods: {
-    fakeImgUrl(event) {
-      event.target.src = 'https://coincap.io/static/logo_mark.png'
     },
   },
 }

@@ -30,7 +30,7 @@
       v-if="$screen.showInTableColumnVolume24Hr"
       class="coin-table-line-carcaas__volumeUsd24Hr"
       :class="{
-        'mod--flash-success-trade': isNewDealJustFinished,
+        'mod--flash-success-default': isNewDealJustFinished,
       }"
       @animationend="finishFlashAnimationTrade"
     >
@@ -40,7 +40,10 @@
 </template>
 
 <script>
-// todo: навести порядок с анимациями.
+
+/**
+ * Vue не умеет анимировать простую подсветку. Поэтому здесь трюк с @animationend.
+ */
 export default {
   data() {
     return {
@@ -110,10 +113,15 @@ export default {
     justify-content: flex-end;
   }
 
-  .mod--flash-success-trade {
-    animation: flash-success-trade $timeMedium;
+  .mod--flash-success-default {
+    animation: flash-success-default $timeMedium;
   }
-  @keyframes flash-success-trade {
+
+  // Анимации подсветки.
+  // При необходимости их использовать где-то ещё
+  // из можно вынести в global.scss
+
+  @keyframes flash-success-default {
     from {background-color: initial;}
     50% {background-color: $clrHighlightDefault;}
     to {background-color: initial;}

@@ -6,9 +6,7 @@
       <virtual-list
         :size="69"
         :remain="15"
-
-        style="max-height: 100%;"
-        class="global-mod--with-cool-scrollbar"
+        class="virtual-list global-mod--with-cool-scrollbar"
       >
         <coin-table-line
           v-for="asset in assets"
@@ -49,11 +47,11 @@ export default {
   },
   methods: {
     async infiniteHandler($state) {
-      const response = await Asset.dispatch('fetchForPaginationTable', { foo: 'bar' })
+      const response = await Asset.dispatch('fetchForPaginationTable')
       if (response.data.data.length) {
-        $state.loaded() // значит можно загружать ещё
+        $state.loaded()
       } else {
-        $state.complete() // значит больше загружать нельзя
+        $state.complete()
       }
     },
   },
@@ -67,6 +65,9 @@ export default {
 
   display: flex;
   flex-flow: column nowrap;
+  .virtual-list {
+    max-height: 100%; // чтобы избежать проблем со скроллом
+  }
   .coin-table__lines {
     flex: 0 1 auto;
     overflow-y: auto;

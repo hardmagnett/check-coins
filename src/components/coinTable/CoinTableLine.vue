@@ -30,9 +30,7 @@ import Asset from '@/orm/Asset'
 const msToNotBlinkAfterMount = 100
 
 export default {
-  components: {
-    CoinTableLineCarcaas, CoinDetails,
-  },
+  components: { CoinTableLineCarcaas, CoinDetails },
   props: {
     asset: {
       type: Asset,
