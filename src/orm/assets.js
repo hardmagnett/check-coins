@@ -91,6 +91,7 @@ export default {
       unreactive.visibleAssetIdsForTable =
         unreactive.visibleAssetIdsForTable.filter((id) => id !== assetId)
     },
+
     async fetchForPaginationTable({ state, commit, dispatch }) {
       const response = await coinApi.get('assets', {
         params: {
@@ -109,6 +110,7 @@ export default {
 
       return response
     },
+
     updatePriceUsd(state, { assetId, assetNewPrice }) {
       Asset.update({
         data: {
@@ -117,6 +119,7 @@ export default {
         },
       })
     },
+
     updatePriceUsdFromPreCache({}, { assetId }) {
 
       let assetFromPreCache = unreactive.notYetUpdatedPrices[assetId]
@@ -127,6 +130,7 @@ export default {
 
       Asset.dispatch('updatePriceUsd', { assetId, assetNewPrice })
     },
+
     updateOrPreCachePriceUsd({}, { coinId, coinNewPrice }) {
       const isCoinVisibleNow = unreactive.visibleAssetIdsForTable.includes(coinId)
 
@@ -142,6 +146,7 @@ export default {
       }
     },
   },
+
   getters: {
     getAssetsPagination(state) {
       return Asset.query()

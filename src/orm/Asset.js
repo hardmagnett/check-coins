@@ -40,7 +40,6 @@ export default class Asset extends Model {
    */
   get priceUsdHumanVisible() {
     const maximumFractionDigits = numberFormatters.getFractionByNumber(this.priceUsd)
-    // let result = this.priceUsd
     const result = _round(this.priceUsd, maximumFractionDigits)
     return result
   }
