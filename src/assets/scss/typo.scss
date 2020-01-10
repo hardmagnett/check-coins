@@ -1,11 +1,9 @@
+//@import "variables";
 body {
   font-size: 16px;
   color: $clrFont;
 }
-//p {
-//  margin-top: 0.5em;
-//  margin-bottom: 0.5em;
-//}
+
 .text {
   &.text--small {
     font-size: 12px;
