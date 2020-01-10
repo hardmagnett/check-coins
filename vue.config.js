@@ -7,4 +7,6 @@ module.exports = {
       },
     },
   },
+  publicPath: '/check-coins',
+  outputDir: 'docs',
 }
