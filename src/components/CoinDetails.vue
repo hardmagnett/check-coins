@@ -20,7 +20,7 @@
 <script>
 
 import Asset from '@/orm/Asset'
-import TheImage from '@/components/misc/TheImage.vue'
+import TheImage from '@/components/misc/TheImage'
 
 
 export default {

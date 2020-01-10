@@ -14,8 +14,8 @@
 </template>
 <script>
 import CoinTable from '@/components/CoinTable.vue'
-import Container from '@/components/Container.vue'
-import ContainerVertical from '@/components/ContainerVertical.vue'
+import Container from '@/components/containers/Container.vue'
+import ContainerVertical from '@/components/containers/ContainerVertical.vue'
 
 export default {
   components: { CoinTable, Container, ContainerVertical },

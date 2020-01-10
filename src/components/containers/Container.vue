@@ -5,7 +5,6 @@
 </template>
 
 <script>
-
 export default {
 
 }
@@ -17,11 +16,7 @@ export default {
   padding-left: $gap;
   margin-right: auto;
   margin-left: auto;
-  /*outline: 1px solid darkred;*/
-  /*@media (min-width: $bpSm) {
-    padding-right: $gap;
-    padding-left: $gap;
-  }*/
+
   @media (min-width: $bpSm2) {
     max-width: $bpSm2;
   }
