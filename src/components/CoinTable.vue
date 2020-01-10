@@ -50,9 +50,9 @@ export default {
     async infiniteHandler($state) {
       const response = await Asset.dispatch('fetchForPaginationTable', { foo: 'bar' })
       if (response.data.data.length) {
-        $state.loaded()	// значит можно загружать ещё
+        $state.loaded() // значит можно загружать ещё
       } else {
-        $state.complete()	// значит больше загружать нельзя
+        $state.complete() // значит больше загружать нельзя
       }
     },
   },

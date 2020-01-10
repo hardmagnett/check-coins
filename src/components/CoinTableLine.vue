@@ -11,7 +11,7 @@
         <p>{{ asset.priceUsdHumanReadable }}</p>
       </template>
       <template v-slot:market-cap>
-        <p>{{ asset.marketCapUsdHumanReadable }}	</p>
+        <p>{{ asset.marketCapUsdHumanReadable }}</p>
       </template>
       <template v-slot:volumeUsd24Hr>
         <p>{{ asset.volumeUsd24HrHumanReadable }}</p>

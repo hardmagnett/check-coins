@@ -31,7 +31,7 @@ function createOptions(options = {}, eventsSettings = {}) {
     format: 'json',
     reconnection: true,
   }
-  let result =  {
+  const result =  {
     ...options,
     passToStoreHandler: createPassToStoreHandler(eventsSettings),
   }
