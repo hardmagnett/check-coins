@@ -4,8 +4,9 @@ import Asset from '@/orm/Asset'
 // интервал в мс, чаще которого не показывать новые сделки
 const msForDeals = 5000
 
-// todo: заполнить
-let unreactive = {
+// Похоже вместо кеширования лучше было-бы применить rxJs.
+// Нужно его хорошо освоить.
+const unreactive = {
   /**
    * Кеш
    * Пример содержания:  {'bitcoin': {lastUpdateTS: timestamp}}
@@ -26,7 +27,6 @@ let unreactive = {
    * Кеш
    * Пример содержания: ['bitcoin']
    */
-
   visibleAssetIdsForTable: [],
 }
 
@@ -61,7 +61,7 @@ export default {
   },
 
   actions: {
-    SOCKET_ON_PRICE_CHANGE({ commit }, newPrices) {
+    SOCKET_ON_PRICE_CHANGE({}, newPrices) {
       for (const coinId in newPrices) {
         const coinNewPrice = newPrices[coinId]
         Asset.dispatch('updateOrPreCachePriceUsd', { coinId, coinNewPrice })
@@ -77,20 +77,17 @@ export default {
      * @param state
      * @param assetId   Number
      */
-    addVisibleAssetIdForTable(state, { assetId }) {
-      Asset.commit((state) => {
-        unreactive.visibleAssetIdsForTable.push(assetId)
-      })
+    addVisibleAssetIdForTable({}, { assetId }) {
+      unreactive.visibleAssetIdsForTable.push(assetId)
     },
     /**
      *
      * @param state
      * @param assetId   Number
      */
-    removeVisibleAssetIdForTable(state, { assetId }) {
-      Asset.commit((state) => {
-        unreactive.visibleAssetIdsForTable = unreactive.visibleAssetIdsForTable.filter((id) => id !== assetId)
-      })
+    removeVisibleAssetIdForTable({}, { assetId }) {
+      unreactive.visibleAssetIdsForTable =
+        unreactive.visibleAssetIdsForTable.filter((id) => id !== assetId)
     },
     async fetchForPaginationTable({ state, commit, dispatch }) {
       const response = await coinApi.get('assets', {
@@ -132,10 +129,6 @@ export default {
       const isCoinVisibleNow = unreactive.visibleAssetIdsForTable.includes(coinId)
 
       if (isCoinVisibleNow) {
-        // todo: здесь должна вызыватся ф-я
-        //  которая условно либо вызовет ф-ю для реального обновления
-        //  должна называться updatePriceUsdDebounced
-        //  либо закеширует
         Asset.dispatch('updatePriceUsd', {
           assetId: coinId,
           assetNewPrice: coinNewPrice,
