@@ -1,10 +1,10 @@
 <template>
   <div class="coin-details">
-    <img
+    <the-image
       class="coin-details__img"
       :src="imgUrl"
-      @error="fakeImgUrl"
-    >
+      src-incorrect="https://coincap.io/static/logo_mark.png"
+    />
 
     <div class="coin-details__texts">
       <p class="coin-details__name">
@@ -20,8 +20,11 @@
 <script>
 
 import Asset from '@/orm/Asset'
+import TheImage from '@/components/misc/TheImage.vue'
+
 
 export default {
+  components: { TheImage },
   props: {
     asset: {
       type: Asset,
