@@ -27,7 +27,7 @@ import CoinDetails from '@/components/coinTable/CoinDetails'
 
 import Asset from '@/orm/Asset'
 
-const msToNotBlinkAfterMount = 100
+const msToNotBlinkAfterMount = 250
 
 export default {
   components: { CoinTableLineCarcaas, CoinDetails },
