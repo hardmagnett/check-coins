@@ -29,8 +29,8 @@
 
 import VirtualList from 'vue-virtual-scroll-list'
 
-import CoinTableHead from '@/components/CoinTableHead'
-import CoinTableLine from '@/components/CoinTableLine'
+import CoinTableHead from '@/components/coinTable/CoinTableHead'
+import CoinTableLine from '@/components/coinTable/CoinTableLine'
 
 import Asset from '@/orm/Asset'
 import Exchange from '@/orm/Exchange'

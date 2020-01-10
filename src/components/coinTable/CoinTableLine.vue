@@ -22,8 +22,8 @@
 
 <script>
 
-import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas'
-import CoinDetails from '@/components/CoinDetails'
+import CoinTableLineCarcaas from '@/components/coinTable/CoinTableLineCarcaas'
+import CoinDetails from '@/components/coinTable/CoinDetails'
 
 import Asset from '@/orm/Asset'
 

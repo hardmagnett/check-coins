@@ -22,7 +22,7 @@
 
 <script>
 
-import CoinTableLineCarcaas from '@/components/CoinTableLineCarcaas'
+import CoinTableLineCarcaas from '@/components/coinTable/CoinTableLineCarcaas'
 
 
 export default {

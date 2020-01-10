@@ -13,7 +13,7 @@
   </div>
 </template>
 <script>
-import CoinTable from '@/components/CoinTable.vue'
+import CoinTable from '@/components/coinTable/CoinTable.vue'
 import Container from '@/components/containers/Container.vue'
 import ContainerVertical from '@/components/containers/ContainerVertical.vue'
 
