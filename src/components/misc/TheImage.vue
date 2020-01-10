@@ -13,6 +13,7 @@
 /**
  * Применение: работает так-же как с обычным тегом img
  * Нужен чтобы при отсутсвии изображения показывать заглушку.
+ * Убрать вывод в консоль браузера 404-х похоже невозможно.
  */
 export default {
   props: {
@@ -28,7 +29,7 @@ export default {
     },
     srcIncorrect: {
       type: String,
-      // прозрачный пиксель. Можно указать "Мертвого песика", как в вк.
+      // прозрачный пиксель. Можно указать "Мертвого пёсика", как в вк.
       default: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
     },
   },
@@ -44,14 +45,9 @@ export default {
           result = this.src
           break
         case 'incorrect':
-          // заглушка - "мертвый пёсик"
-          // result = '/img/no-image.png'
           result = this.srcIncorrect
           break
         case 'checking':
-          // заглушка - прозрачный пиксель
-          // result = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7'
-          // result = this.scrLoading
           result = this.srcIncorrect
           break
         default:
