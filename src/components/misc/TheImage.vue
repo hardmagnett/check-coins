@@ -48,7 +48,7 @@ export default {
           result = this.srcIncorrect
           break
         case 'checking':
-          result = this.srcIncorrect
+          result = this.srcLoading
           break
         default:
           result = '/img/no-image.png'
